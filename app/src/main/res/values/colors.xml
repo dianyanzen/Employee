@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4A535E</color>
+    <color name="colorPrimaryDark">#4A535E</color>
+    <color name="colorAccent">#2196F3</color>
+    <color name="arkaButtonColor">#4A535E</color>
+    <color name="arkaButtonTextColor">#ffffff</color>
+    <color name="arkaEditTextNormal">#555555</color>
+    <color name="arkaEditTextHighlight">#555555</color>
+    <color name="arkaEditTextActivated">#555555</color>
+
+    <color name="arkaTextLight">#dadada</color>
+    <color name="arkaTextDark">#555555</color>
+
+    <color name="tableBackground">#ffffff</color>
+    <color name="tableBorder">#eeeeee</color>
+
+    <color name="arkaGreen">#69f0ae</color>
+    <color name="arkaRed">#ff7043</color>
+    <color name="arkaOrange">#ffb74d</color>
+    <color name="arkaGrey">#777</color>
+
+    <color name="colorFAB1">#2196F3</color>
+    <color name="colorFAB2">#E040FB</color>
+</resources>

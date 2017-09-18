@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Custom Style for Personalia.id -->
+
+    <style name="ArkaButton" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorButtonNormal">@color/arkaButtonColor</item>
+        <item name="android:textColor">@color/arkaButtonTextColor</item>
+    </style>
+
+    <style name="ArkaTextInputLayout">
+        <item name="android:textColor">@color/arkaEditTextNormal</item>
+        <item name="android:textSize">@dimen/input_text_layout_size</item>
+    </style>
+
+    <style name="ArkaEditText" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/arkaEditTextNormal</item>
+        <item name="colorControlActivated">@color/arkaEditTextActivated</item>
+        <item name="colorControlHighlight">@color/arkaEditTextHighlight</item>
+        <item name="android:textColorHint">@color/arkaEditTextNormal</item>
+        <item name="android:textColor">@color/arkaEditTextNormal</item>
+    </style>
+
+    <style name="ArkaCalendar" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+</resources>

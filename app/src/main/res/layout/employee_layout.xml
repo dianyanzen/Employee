@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/_photo"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/_fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cep Johnson"
+        android:textColor="@color/arkaTextDark"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/_photo"
+        android:layout_marginStart="19dp" />
+
+</RelativeLayout>

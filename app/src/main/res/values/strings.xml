@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">personalia.id</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Log in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Kata Sandi</string>
+    <string name="action_sign_in">Masuk</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="register">Daftar sekarang</string>
+
+    <!-- Menu -->
+    <string name="dashboard">Dasbor</string>
+    <string name="travel">Dinas Luar</string>
+    <string name="claim">Klaim</string>
+    <string name="attendance">Izin</string>
+    <string name="overtime">Lembur</string>
+    <string name="report">Kehadiran</string>
+    <string name="help">Bantuan</string>
+    <string name="settings">Pengaturan</string>
+    <string name="logout">Keluar</string>
+    <!-- Etc Dashboard -->
+    <string name="clock_in">Clock In</string>
+    <string name="project">Tugas</string>
+    <string name="calendar_work">Kalender</string>
+
+    <string name="new_travel">Dinas Luar Baru</string>
+    <string name="new_claim">Klaim Baru</string>
+    <string name="new_attendance">Izin Baru</string>
+    <string name="new_overtime">Lembur Baru</string>
+    <string name="new_report">Kehadiran Baru</string>
+
+    <string name="search_travel">Pencarian Dinas Luar</string>
+    <string name="search_claim">Pencarian Klaim</string>
+    <string name="search_attendance">Pencarian Izin</string>
+    <string name="search_overtime">Pencarian Lembur</string>
+    <string name="search_report">Pencarian Kehadiran</string>
+
+    <string name="detail_travel">Rincian Dinas Luar</string>
+    <string name="detail_claim">Rincian Klaim</string>
+    <string name="detail_attendance">Rincian Izin</string>
+    <string name="detail_overtime">Rincian Lembur</string>
+    <string name="detail_report">Rincian Kehadiran</string>
+</resources>

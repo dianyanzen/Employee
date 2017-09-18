@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "186806450434",
+    "firebase_url": "https://employe-80d4c.firebaseio.com",
+    "project_id": "employe-80d4c",
+    "storage_bucket": "employe-80d4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186806450434:android:b6520acfd0ab09de",
+        "android_client_info": {
+          "package_name": "id.personalia.employe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186806450434-rhu73q6enu75h10o1rbsvvovhvr2j9s5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.personalia.employe",
+            "certificate_hash": "55235a39554760cb596d9eacc8d32c8631c7e2e5"
+          }
+        },
+        {
+          "client_id": "186806450434-vrk4r05emeh6vtnv4hbgmptfj4ci5cfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXRhOXfxY2bEM27beXKVTlgTHzqHXKo_Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186806450434-vrk4r05emeh6vtnv4hbgmptfj4ci5cfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

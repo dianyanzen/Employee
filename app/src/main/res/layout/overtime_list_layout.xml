@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:attr/selectableItemBackground">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:id="@+id/otimageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/ottv_tanggal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_toRightOf="@+id/otimageView"
+        android:layout_toEndOf="@+id/otimageView"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ottv_diajukan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ottv_tanggal"
+        android:layout_alignStart="@+id/ottv_tanggal"
+        android:layout_below="@+id/ottv_tanggal"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/ottv_ket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/ottv_tanggal"
+        android:layout_toRightOf="@+id/ottitik"
+        android:layout_toEndOf="@+id/ottitik"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+    <TextView
+        android:id="@+id/ottv_jamlembur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/ottv_diajukan"
+        android:layout_alignLeft="@+id/ottv_diajukan"
+        android:layout_alignStart="@+id/ottv_diajukan"
+        />
+    <TextView
+        android:id="@+id/ottv_kalkulasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/ottv_diajukan"
+        android:layout_toRightOf="@+id/ottitik2"
+        android:layout_toEndOf="@+id/ottitik2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+    <TextView
+        android:id="@+id/ottv_jumlah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/ottv_diajukan"
+        android:layout_toRightOf="@+id/ottitik3"
+        android:layout_toEndOf="@+id/ottitik3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+
+    <ImageView
+        android:id="@+id/ottiv_status"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_report"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/ottitik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/ottv_tanggal"
+        android:layout_toRightOf="@+id/ottv_diajukan"
+        android:layout_toEndOf="@+id/ottv_diajukan" />
+    <TextView
+        android:id="@+id/ottitik2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/ottv_diajukan"
+        android:layout_toRightOf="@+id/ottv_jamlembur"
+        android:layout_toEndOf="@+id/ottv_jamlembur" />
+    <TextView
+        android:id="@+id/ottitik3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/ottv_diajukan"
+        android:layout_toRightOf="@+id/ottv_kalkulasi"
+        android:layout_toEndOf="@+id/ottv_kalkulasi" />
+
+</RelativeLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="9dp"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardElevation="0.01dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/dbimage"
+                android:layout_width="match_parent"
+                android:layout_marginTop="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="-10dp"
+                android:layout_marginRight="-10dp"/>
+
+            <RelativeLayout
+                android:id="@+id/top_layout"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_dbmain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="99"
+                    android:textAlignment="center"
+                    android:textColor="@color/arkaTextDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_dbinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_dbmain"
+                    android:layout_marginTop="55dp"
+                    android:gravity="top"
+                    android:text="Onsite"
+                    android:textAlignment="center"
+                    android:textColor="@color/arkaTextDark"
+                    android:textSize="14dp"
+                    android:textStyle="bold"  />
+
+                <TextView
+                    android:id="@+id/tv_dbstatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_dbinfo"
+                    android:layout_marginTop="5dp"
+                    android:gravity="bottom"
+                    android:text="Disetujui: 80 Onsite"
+                    android:textAlignment="center"
+                    android:textColor="@color/arkaTextDark"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
