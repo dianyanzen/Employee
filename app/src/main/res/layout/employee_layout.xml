@@ -17,10 +17,12 @@
         android:id="@+id/_fullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cep Johnson"
+        android:text="Project 1"
         android:textColor="@color/arkaTextDark"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/_photo"
         android:layout_toEndOf="@+id/_photo"
+        android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp" />
 
 </RelativeLayout>

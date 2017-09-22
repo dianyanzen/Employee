@@ -138,7 +138,8 @@ public class SearchClaimActivity extends AppCompatActivity implements DatePicker
                     Intent intent = new Intent(SearchClaimActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(SearchClaimActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 1000);
                 }
             }
         });

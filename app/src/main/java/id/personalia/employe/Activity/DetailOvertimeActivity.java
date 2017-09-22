@@ -138,7 +138,8 @@ public class DetailOvertimeActivity extends AppCompatActivity implements DatePic
                     Intent intent = new Intent(DetailOvertimeActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(DetailOvertimeActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 1000);
                 }
             }
         });

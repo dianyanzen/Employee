@@ -141,7 +141,8 @@ public class SearchAttendanceActivity extends AppCompatActivity implements DateP
                     Intent intent = new Intent(SearchAttendanceActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(SearchAttendanceActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 1000);
                 }
             }
         });

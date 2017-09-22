@@ -21,9 +21,9 @@
         android:visibility="gone" />
 
     <ImageView
-        android:layout_width="@dimen/login_logo_width"
-        android:layout_height="@dimen/login_logo_height"
-        android:background="@drawable/logo_app2"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:background="@drawable/logo_app_personalia2"
         android:layout_marginTop="60dp"/>
 
     <LinearLayout

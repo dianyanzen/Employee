@@ -138,7 +138,8 @@ public class DetailClaimActivity extends AppCompatActivity implements DatePicker
                     Intent intent = new Intent(DetailClaimActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(DetailClaimActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 2000);
                 }
             }
         });
@@ -250,6 +251,13 @@ public class DetailClaimActivity extends AppCompatActivity implements DatePicker
             if (resultCode == RESULT_OK) {
                 inputForms.get(_index).setVALUE(data.getStringExtra("FULLNAME"));
                 EMPLOYEE_ID = Integer.parseInt(data.getStringExtra("ID"));
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if (requestCode == PROJECT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                inputForms.get(_index).setVALUE(data.getStringExtra("FULLNAME"));
+                PROJECT_ID = Integer.parseInt(data.getStringExtra("ID"));
                 adapter.notifyDataSetChanged();
             }
         }

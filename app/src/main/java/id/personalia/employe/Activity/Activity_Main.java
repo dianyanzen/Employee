@@ -1,16 +1,28 @@
 package id.personalia.employe.Activity;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.ArrayList;
 
 import id.personalia.employe.Fragment.AttendanceFragment;
 import id.personalia.employe.Fragment.ClaimFragment;
@@ -18,7 +30,11 @@ import id.personalia.employe.Fragment.DashboardFragment;
 import id.personalia.employe.Fragment.OvertimeFragment;
 import id.personalia.employe.Fragment.ReportFragment;
 import id.personalia.employe.Fragment.TravelFragment;
+import id.personalia.employe.Model.Employee;
+import id.personalia.employe.Model.Project;
 import id.personalia.employe.R;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Dian Yanzen on 9/13/2017.
@@ -26,14 +42,15 @@ import id.personalia.employe.R;
 
 public class Activity_Main  extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    ArrayList<Project> Projects;
+    Project Project;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
+        projectData();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
              this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -47,9 +64,30 @@ public class Activity_Main  extends AppCompatActivity
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment, "DASHBOARD");
         fragmentTransaction.commit();
+        FirebaseMessaging.getInstance().subscribeToTopic("Notif");
 
     }
+    private void sendNotification(String messageBody) {
+        Intent intent = new Intent(this, Activity_Main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
 
+        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.user)
+                .setContentTitle("FCM Message")
+                .setContentText(messageBody)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+        Log.d(TAG, "Message Notification Body: " + messageBody);
+        Toast.makeText(getApplicationContext(), "Message Notification Body"+messageBody, Toast.LENGTH_SHORT).show();
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
     @Override
     public void onBackPressed() {
         /*
@@ -159,5 +197,17 @@ public class Activity_Main  extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void projectData() {
+        Projects = new ArrayList<Project>();
+
+        for(int i=1;i<=20;i++){
+            Project = new Project();
+            Project.setProjectID(String.valueOf(i));
+            Project.setProjectName("Project " + String.valueOf(i));
+            Project.setProjectDate("29-09-2017");
+            Project.setProjectStatus("On Progress");
+            Projects.add(Project);
+        }
     }
 }

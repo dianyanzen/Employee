@@ -26,6 +26,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -141,7 +148,8 @@ public class DetailAttendanceActivity extends AppCompatActivity implements DateP
                     Intent intent = new Intent(DetailAttendanceActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(DetailAttendanceActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 1000);
                 }
             }
         });
@@ -210,16 +218,16 @@ public class DetailAttendanceActivity extends AppCompatActivity implements DateP
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
-        inputForm.setTYPE("TIMEPICKER");
-        inputForm.setLABEL("Dari Jam");
-        inputForm.setVALUE(time);
+        inputForm.setTYPE("DATEPICKER");
+        inputForm.setLABEL("Dari Tanggal");
+        inputForm.setVALUE(helper.zeroPadLeft(year) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(day));
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
-        inputForm.setTYPE("TIMEPICKER");
-        inputForm.setLABEL("Sampai Jam");
-        inputForm.setVALUE(time);
+        inputForm.setTYPE("DATEPICKER");
+        inputForm.setLABEL("Sampai Tanggal");
+        inputForm.setVALUE(helper.zeroPadLeft(year) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(day));
         inputForms.add(inputForm);
 
 
@@ -235,4 +243,5 @@ public class DetailAttendanceActivity extends AppCompatActivity implements DateP
             }
         }
     }
+
 }

@@ -141,7 +141,8 @@ public class SearchReportActivity extends AppCompatActivity implements DatePicke
                     Intent intent = new Intent(SearchReportActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(SearchReportActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 1000);
                 }
             }
         });

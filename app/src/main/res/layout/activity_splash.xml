@@ -14,15 +14,10 @@
         tools:layout_editor_absoluteX="8dp" />
 
     <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_marginTop="150dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/logo_app2"/>
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/logo_app2_ori"/>
+        android:background="@drawable/logo_app_personalia2"/>
 </FrameLayout>

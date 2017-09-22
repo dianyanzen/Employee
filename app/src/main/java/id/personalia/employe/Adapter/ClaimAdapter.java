@@ -55,7 +55,7 @@ public class ClaimAdapter extends RecyclerView.Adapter<ClaimAdapter.ViewHolder>{
                 break;
         }
 
-        holder.cliv_status.setPadding(20,20,20,20);
+        holder.cliv_status.setPadding(10,10,10,10);
 
         holder.cltv_tanggal.setText(m.getCLTTANGGAL());
         holder.cltv_diajukan.setText(m.getCLNMPENGAJU());

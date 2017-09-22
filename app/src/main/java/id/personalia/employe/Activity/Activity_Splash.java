@@ -1,12 +1,22 @@
 package id.personalia.employe.Activity;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import id.personalia.employe.R;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Dian Yanzen on 9/13/2017.
@@ -31,4 +41,5 @@ public class Activity_Splash extends AppCompatActivity {
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
+
 }

@@ -54,7 +54,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
                 break;
         }
 
-        holder.attiv_status.setPadding(20,20,20,20);
+        holder.attiv_status.setPadding(10,10,10,10);
 
         holder.atttv_tanggal.setText(m.getATTTANGGAL());
         holder.atttv_descrip.setText(m.getATTDESCRIP());

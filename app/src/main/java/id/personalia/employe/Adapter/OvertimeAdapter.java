@@ -54,7 +54,7 @@ public class OvertimeAdapter extends RecyclerView.Adapter<OvertimeAdapter.ViewHo
                 break;
         }
 
-        holder.ottiv_status.setPadding(20,20,20,20);
+        holder.ottiv_status.setPadding(10,10,10,10);
 
         holder.ottv_tanggal.setText(m.getOTTANGGAL());
         holder.ottv_diajukan.setText(m.getOTDIAJUKAN());

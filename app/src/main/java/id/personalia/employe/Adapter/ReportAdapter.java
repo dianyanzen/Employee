@@ -54,7 +54,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
                 break;
         }
 
-        holder.RPiv_status.setPadding(20,20,20,20);
+        holder.RPiv_status.setPadding(10,10,10,10);
 
         holder.RPtv_tanggal.setText(m.getRPTANGGAL());
         holder.RPtv_clockin.setText(m.getRPCL_IN());

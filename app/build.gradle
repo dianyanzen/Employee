@@ -25,17 +25,29 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //compile 'com.squareup.retrofit:retrofit:1.9.0'
+    //compile 'com.roomorama:caldroid:3.0.1'
+    compile project(':caldroid')
+    //Android Suport Service
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:cardview-v7:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //Retrofit Service
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+    //Kenburnsview Service
     compile 'com.flaviofaria:kenburnsview:1.0.7'
-    compile 'com.google.firebase:firebase-core:10.0.1'
+    //Gooogle Service
+    compile 'com.google.android.gms:play-services-maps:10.2.0'
+    compile 'com.google.firebase:firebase-messaging:10.2.0'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile 'com.google.android.gms:play-services-auth:10.2.0'
+    compile 'com.google.android.gms:play-services-gcm:10.2.0'
+    compile 'com.google.firebase:firebase-crash:10.2.0'
+    compile 'com.google.firebase:firebase-analytics:10.2.0'
+    compile 'com.google.firebase:firebase-core:10.2.0'
+    //Test Compile
     testCompile 'junit:junit:4.12'
 }
-
-
 apply plugin: 'com.google.gms.google-services'

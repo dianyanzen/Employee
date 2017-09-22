@@ -138,7 +138,8 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
                     Intent intent = new Intent(DetailTravelActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
-
+                    Intent intent = new Intent(DetailTravelActivity.this, ProjectActivity.class);
+                    startActivityForResult(intent, 1000);
                 }
             }
         });

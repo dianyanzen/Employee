@@ -2,7 +2,8 @@ package id.personalia.employe.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,13 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.roomorama.caldroid.CaldroidFragment;
+import com.roomorama.caldroid.CaldroidListener;
 
-import id.personalia.employe.Activity.DetailAttendanceActivity;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import id.personalia.employe.Activity.DetailReportActivity;
+import id.personalia.employe.Activity.EmployeeActivity;
+import id.personalia.employe.Activity.ProjectActivity;
+import id.personalia.employe.Activity.ProjectActivityDisplay;
 import id.personalia.employe.Fragment.AttendanceFragment;
 import id.personalia.employe.Fragment.ClaimFragment;
 import id.personalia.employe.Fragment.OvertimeFragment;
@@ -32,6 +40,34 @@ import id.personalia.employe.R;
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder>{
     ArrayList<Dashboard> Dashboards;
     Context context;
+    private CaldroidFragment dialogCaldroidFragment;
+    final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+
+    final CaldroidListener listener = new CaldroidListener() {
+
+        @Override
+        public void onSelectDate(Date date, View view) {
+            Toast.makeText(context, formatter.format(date),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onChangeMonth(int month, int year) {
+            String text = "Bulan: " + month + " Tahun: " + year;
+            Toast.makeText(context, text,
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onLongClickDate(Date date, View view) {
+            Toast.makeText(context,
+                    "Long click " + formatter.format(date),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    };
 
     public DashboardAdapter(Context context, int resource, ArrayList<Dashboard> object) {
         this.context = context;
@@ -99,7 +135,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                 if (isLongClick) {
                     switch (Dashboards.get(position).getMAIN()){
                         case "Clock In":
-                            Intent intent = new Intent(activity, DetailAttendanceActivity.class);
+                            Intent intent = new Intent(activity, DetailReportActivity.class);
                             activity.startActivity(intent);
                             break;
                         case "Dinas Luar":
@@ -138,16 +174,32 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                             fragmentTransactionReport.commit();
                             break;
                         case "Tugas":
-                            Toast.makeText(context, "Haloo Saya Pilih Tugas", Toast.LENGTH_SHORT).show();
+                            Intent intentproject = new Intent(activity, ProjectActivityDisplay.class);
+                            activity.startActivity(intentproject);
                             break;
                         case "Kalender":
-                            Toast.makeText(context, "Haloo Saya Pilih Kalender", Toast.LENGTH_SHORT).show();
+                            try {
+                                dialogCaldroidFragment = new CaldroidFragment();
+                                dialogCaldroidFragment.setCaldroidListener(listener);
+
+                                // If activity is recovered from rotation
+                                final String dialogTag = "CALDROID_DIALOG_FRAGMENT";
+
+                                Bundle bundle = new Bundle();
+                                // Setup dialogTitle
+                                dialogCaldroidFragment.setArguments(bundle);
+                                dialogCaldroidFragment.show(((FragmentActivity)context).getSupportFragmentManager(),
+                                        //dialogCaldroidFragment.show((context).getSupportFragmentManager(),
+                                        dialogTag);
+                            } catch (Exception e){
+
+                            }
                             break;
                     }
                 } else {
-                    switch (Dashboards.get(position).getMAIN()){
+                    switch (Dashboards.get(position).getMAIN()) {
                         case "Clock In":
-                            Intent intent = new Intent(activity, DetailAttendanceActivity.class);
+                            Intent intent = new Intent(activity, DetailReportActivity.class);
                             activity.startActivity(intent);
                             break;
                         case "Dinas Luar":
@@ -186,10 +238,30 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                             fragmentTransactionReport.commit();
                             break;
                         case "Tugas":
-                            Toast.makeText(context, "Saya Pilih Tugas", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Saya Pilih Tugas", Toast.LENGTH_SHORT).show();
+                            Intent intentproject = new Intent(activity, ProjectActivityDisplay.class);
+                            activity.startActivity(intentproject);
                             break;
                         case "Kalender":
-                            Toast.makeText(context, "Saya Pilih Kalender", Toast.LENGTH_SHORT).show();
+                            try {
+                                dialogCaldroidFragment = new CaldroidFragment();
+                                dialogCaldroidFragment.setCaldroidListener(listener);
+
+                                // If activity is recovered from rotation
+                                final String dialogTag = "CALDROID_DIALOG_FRAGMENT";
+
+                                Bundle bundle = new Bundle();
+                                // Setup dialogTitle
+                                dialogCaldroidFragment.setArguments(bundle);
+                                dialogCaldroidFragment.show(((FragmentActivity)context).getSupportFragmentManager(),
+                                        //dialogCaldroidFragment.show((context).getSupportFragmentManager(),
+                                        dialogTag);
+                            } catch (Exception e){
+
+                            }
+
+                            //Toast.makeText(context, "Saya Pilih Kalender", Toast.LENGTH_SHORT).show();
+
                             break;
                     }
                 }
@@ -209,6 +281,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         private ItemClickListener clickListener;
         ImageView dbimage;
         TextView tv_dbmain, tv_dbinfo, tv_dbstatus ;
+        private CaldroidFragment dialogCaldroidFragment;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -240,9 +313,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             return true;
 
         }
+
+
     }
     public interface ItemClickListener {
         void onClick(View view, int position, boolean isLongClick);
 
     }
+
 }

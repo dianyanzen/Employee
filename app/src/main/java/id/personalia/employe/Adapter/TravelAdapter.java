@@ -60,7 +60,7 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.ViewHolder
                 break;
         }
 
-        holder.traveliv_status.setPadding(20,20,20,20);
+        holder.traveliv_status.setPadding(10,10,10,10);
 
         holder.traveltv_lokasi.setText(m.getTUJUAN());
         holder.traveltv_tanggal.setText(m.getTANGGAL());

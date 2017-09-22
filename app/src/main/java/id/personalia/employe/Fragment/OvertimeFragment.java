@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import id.personalia.employe.Activity.DetailOvertimeActivity;
 import id.personalia.employe.Activity.DetailReportActivity;
+import id.personalia.employe.Activity.SearchOvertimeActivity;
 import id.personalia.employe.Activity.SearchReportActivity;
 import id.personalia.employe.Adapter.OvertimeAdapter;
 import id.personalia.employe.Model.Overtime;
@@ -110,14 +111,14 @@ public class OvertimeFragment extends Fragment {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), DetailReportActivity.class);
+                Intent intent = new Intent(getActivity(), DetailOvertimeActivity.class);
                 startActivity(intent);
             }
         });
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchReportActivity.class);
+                Intent intent = new Intent(getActivity(), SearchOvertimeActivity.class);
                 startActivity(intent);
             }
         });
