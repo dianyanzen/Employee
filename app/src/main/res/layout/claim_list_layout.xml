@@ -13,7 +13,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:src="@android:drawable/sym_def_app_icon"
-        android:id="@+id/climageView"
+        android:id="@+id/cliv_img"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -26,8 +26,8 @@
         android:layout_gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
-        android:layout_toRightOf="@+id/climageView"
-        android:layout_toEndOf="@+id/climageView"
+        android:layout_toRightOf="@+id/cliv_img"
+        android:layout_toEndOf="@+id/cliv_img"
         android:layout_weight="1"
         android:gravity="left"
         android:text="TextView"
@@ -37,13 +37,13 @@
         android:id="@+id/cltv_diajukan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cltv_tanggal"
-        android:layout_alignStart="@+id/cltv_tanggal"
-        android:layout_below="@+id/cltv_tanggal"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_below="@+id/cltv_tanggal"
+        android:layout_alignLeft="@+id/cltv_tanggal"
+        android:layout_alignStart="@+id/cltv_tanggal" />
 
     <TextView
         android:id="@+id/cltv_deskripsi"
@@ -59,7 +59,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp" />
     <TextView
-        android:id="@+id/cltv_jumlah"
+        android:id="@+id/cltv_deskrp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -69,6 +69,19 @@
         android:layout_below="@+id/cltv_diajukan"
         android:layout_alignLeft="@+id/cltv_diajukan"
         android:layout_alignStart="@+id/cltv_diajukan" />
+    <TextView
+        android:id="@+id/cltv_jumlah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/cltv_diajukan"
+        android:layout_toRightOf="@+id/cltitik2"
+        android:layout_toEndOf="@+id/cltitik2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
 
     <ImageView
         android:id="@+id/cliv_status"
@@ -89,5 +102,15 @@
         android:layout_below="@+id/cltv_tanggal"
         android:layout_toRightOf="@id/cltv_diajukan"
         android:layout_toEndOf="@+id/cltv_diajukan" />
+    <TextView
+        android:id="@+id/cltitik2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/cltv_diajukan"
+        android:layout_toRightOf="@id/cltv_deskrp"
+        android:layout_toEndOf="@+id/cltv_deskrp" />
 
 </RelativeLayout>

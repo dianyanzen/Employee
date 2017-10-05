@@ -131,19 +131,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
-
-        <activity android:name=".Activity.Activity_Clockin"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity android:name=".Activity.Activity_Clockout"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
-
-
-
         <service
             android:name=".Helper.MyFirebaseInstanceIDService">
             <intent-filter>

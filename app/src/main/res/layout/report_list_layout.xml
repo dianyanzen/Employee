@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/RPtv_tanggal"
         android:layout_alignStart="@+id/RPtv_tanggal"
-        android:layout_below="@+id/RPtv_tanggal"
+        android:layout_below="@+id/RPtv_name"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
@@ -53,22 +53,35 @@
         android:layout_weight="1"
         android:gravity="left"
         android:text="TextView"
-        android:layout_below="@+id/RPtv_tanggal"
+        android:layout_below="@+id/RPtv_name"
         android:layout_toRightOf="@+id/RPtitik"
         android:layout_toEndOf="@+id/RPtitik"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp" />
     <TextView
-        android:id="@+id/RPtv_workhour"
+        android:id="@+id/RPtv_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
         android:text="TextView"
-        android:layout_below="@+id/RPtv_clockin"
-        android:layout_alignLeft="@+id/RPtv_clockin"
-        android:layout_alignStart="@+id/RPtv_clockin" />
+        android:layout_below="@+id/RPtv_name"
+        android:layout_toRightOf="@+id/RPtitik2"
+        android:layout_toEndOf="@+id/RPtitik2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+    <TextView
+        android:id="@+id/RPtv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/RPtv_tanggal"
+        android:layout_alignLeft="@+id/RPtv_tanggal"
+        android:layout_alignStart="@+id/RPtv_tanggal" />
 
     <ImageView
         android:id="@+id/RPiv_status"
@@ -86,8 +99,18 @@
         android:text="·"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:layout_below="@+id/RPtv_tanggal"
+        android:layout_below="@+id/RPtv_name"
         android:layout_toRightOf="@+id/RPtv_clockin"
         android:layout_toEndOf="@+id/RPtv_clockin" />
+    <TextView
+        android:id="@+id/RPtitik2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/RPtv_name"
+        android:layout_toRightOf="@+id/RPtv_clockout"
+        android:layout_toEndOf="@+id/RPtv_clockout" />
 
 </RelativeLayout>

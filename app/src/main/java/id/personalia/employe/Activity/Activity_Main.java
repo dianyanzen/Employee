@@ -4,25 +4,36 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.personalia.employe.Fragment.AttendanceFragment;
 import id.personalia.employe.Fragment.ClaimFragment;
@@ -30,11 +41,15 @@ import id.personalia.employe.Fragment.DashboardFragment;
 import id.personalia.employe.Fragment.OvertimeFragment;
 import id.personalia.employe.Fragment.ReportFragment;
 import id.personalia.employe.Fragment.TravelFragment;
+import id.personalia.employe.Helper.DbUserData;
 import id.personalia.employe.Model.Employee;
 import id.personalia.employe.Model.Project;
+import id.personalia.employe.Model.UserData;
 import id.personalia.employe.R;
 
 import static android.content.ContentValues.TAG;
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static id.personalia.employe.R.id.imageView;
 
 /**
  * Created by Dian Yanzen on 9/13/2017.
@@ -44,9 +59,13 @@ public class Activity_Main  extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ArrayList<Project> Projects;
     Project Project;
+    String FragmentNM;
+    DbUserData db = new DbUserData(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getIntent().getExtras();
+        FragmentNM = bundle.getString("FragmentNM");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -58,13 +77,139 @@ public class Activity_Main  extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        Log.e("Nama",FragmentNM);
+        //Toast.makeText(getApplicationContext(), "Message Notification Body "+FragmentNM, Toast.LENGTH_SHORT).show();
         navigationView.setNavigationItemSelectedListener(this);
+        if (bundle.getString("FragmentNM").equals("Dashboard")) {
+            DashboardFragment fragment = new DashboardFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "DASHBOARD");
+            fragmentTransaction.commit();
+            //Toast.makeText(getApplicationContext(), "Asew " + FragmentNM, Toast.LENGTH_SHORT).show();
+        }else if(bundle.getString("FragmentNM").equals("Travel")){
+            TravelFragment fragment = new TravelFragment();
+            String prm1 = bundle.getString("param1");
+            String prm2 = bundle.getString("param2");
+            String val1 = bundle.getString("val1");
+            String val2 = bundle.getString("val2");
+            Bundle fragbundle = new Bundle();
+            fragbundle.putString(prm1, val1);
+            fragbundle.putString(prm2, val2);
+            fragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "TRAVEL");
+            fragmentTransaction.addToBackStack("TRAVEL");
+            fragmentTransaction.commit();
+        }else if(bundle.getString("FragmentNM").equals("Claim")){
+            ClaimFragment fragment = new ClaimFragment();
+            String prm1 = bundle.getString("param1");
+            String prm2 = bundle.getString("param2");
+            String val1 = bundle.getString("val1");
+            String val2 = bundle.getString("val2");
+            Bundle fragbundle = new Bundle();
+            fragbundle.putString(prm1, val1);
+            fragbundle.putString(prm2, val2);
+            fragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "CLAIM");
+            fragmentTransaction.addToBackStack("CLAIM");
+            fragmentTransaction.commit();
+        }else if(bundle.getString("FragmentNM").equals("Attendance")){
+            AttendanceFragment fragment = new AttendanceFragment();
+            String prm1 = bundle.getString("param1");
+            String prm2 = bundle.getString("param2");
+            String val1 = bundle.getString("val1");
+            String val2 = bundle.getString("val2");
+            Bundle fragbundle = new Bundle();
+            fragbundle.putString(prm1, val1);
+            fragbundle.putString(prm2, val2);
+            fragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "ATTENDANCE");
+            fragmentTransaction.addToBackStack("ATTENDANCE");
+            fragmentTransaction.commit();
+        }else if(bundle.getString("FragmentNM").equals("Overtime")){
+            OvertimeFragment fragment = new OvertimeFragment();
+            String prm1 = bundle.getString("param1");
+            String prm2 = bundle.getString("param2");
+            String val1 = bundle.getString("val1");
+            String val2 = bundle.getString("val2");
+            Bundle fragbundle = new Bundle();
+            fragbundle.putString(prm1, val1);
+            fragbundle.putString(prm2, val2);
+            fragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "OVERTIME");
+            fragmentTransaction.addToBackStack("OVERTIME");
+            fragmentTransaction.commit();
+        }else if(bundle.getString("FragmentNM").equals("Report")){
+            ReportFragment fragment = new ReportFragment();
+            String prm1 = bundle.getString("param1");
+            String prm2 = bundle.getString("param2");
+            String val1 = bundle.getString("val1");
+            String val2 = bundle.getString("val2");
+            Bundle fragbundle = new Bundle();
+            fragbundle.putString(prm1, val1);
+            fragbundle.putString(prm2, val2);
+            fragment.setArguments(bundle);
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "REPORT");
+            fragmentTransaction.addToBackStack("REPORT");
+            fragmentTransaction.commit();
+        }else{
+            DashboardFragment fragment = new DashboardFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "DASHBOARD");
+            fragmentTransaction.commit();
+        }
 
-        DashboardFragment fragment = new DashboardFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment, "DASHBOARD");
-        fragmentTransaction.commit();
         FirebaseMessaging.getInstance().subscribeToTopic("Notif");
+        List<UserData> UserDataList = db.getAllUserDataList();
+
+        for (UserData userData : UserDataList) {
+
+
+            String log = "Id: " + userData.getEMPLOYEE_ID() + " ,Name: " + userData.getEMPLOYEE_NAME() + " ,Address: " + userData.getADDRESS()
+                    + " ,Position: " + userData.getPOSITION_NAME()+ " ,Role: " + userData.getROLE_NAME();
+            Log.d("Shop: : ", log);
+            if (!userData.getEMPLOYEE_NAME().isEmpty()) {
+                //Toast.makeText(getApplicationContext(), "Message Notification Body"+userData.getEMPLOYEE_NAME(), Toast.LENGTH_SHORT).show();
+                TextView Employee_name = (TextView) headerView.findViewById(R.id.tv_navName);
+                TextView Employee_position = (TextView) headerView.findViewById(R.id.tv_navposition);
+                TextView EmployeeRole = (TextView) headerView.findViewById(R.id.tv_navrole);
+                ImageView UserImage = (ImageView) headerView.findViewById(R.id.iv_navMain);
+
+                Employee_name.setText(userData.getEMPLOYEE_NAME());
+                Employee_position.setText(userData.getPOSITION_NAME());
+                EmployeeRole.setText(userData.getROLE_NAME());
+                if (!userData.getPHOTO().isEmpty()){
+                    String imageurl = userData.getPHOTO();
+                    String companyid = userData.getCOMPANY_ID();
+                    Log.e("imageurl",imageurl);
+                    Log.e("companyid",companyid);
+                        Glide.with(Activity_Main.this)
+                        .load("https://personalia.id/assets/cid"+companyid+"/profile/thumbs/"+imageurl)
+                        .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_photo))
+                        //.thumbnail(0.5f)
+
+                        .transition(withCrossFade())
+                        .into(UserImage);
+                }else{
+                    Glide.with(Activity_Main.this)
+                        .load("https://personalia.id/zrcs/default/assets/images/users/thumbs/user_photo.png")
+                        .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_photo))
+                            //.thumbnail(0.5f)
+                            //.placeholder(R.drawable.user)
+                            //.crossFade()
+                            .transition(withCrossFade())
+                            .into(UserImage);
+                }
+            }
+
+
+        }
+
 
     }
     private void sendNotification(String messageBody) {
@@ -189,6 +334,7 @@ public class Activity_Main  extends AppCompatActivity
             fragmentTransaction.addToBackStack("REPORT");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_logout) {
+            db.deleteAllUserData();
             Intent mainIntent = new Intent(Activity_Main.this, Activity_Login.class);
             startActivity(mainIntent);
             finish();

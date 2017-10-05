@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -15,6 +16,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -25,14 +27,18 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import id.personalia.employe.Adapter.InputFormAdapter;
 import id.personalia.employe.Helper.ArkaHelper;
+import id.personalia.employe.Helper.DbUserData;
 import id.personalia.employe.Model.InputForm;
+import id.personalia.employe.Model.UserData;
 import id.personalia.employe.R;
 
 /**
@@ -54,7 +60,7 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
     AlertDialog.Builder builder;
     EditText popupEditText;
     SearchView sv;
-
+    private static String is_admin,employee_id,employee_name,company_id,atasan_name,atasan_id;
     int EMPLOYEE_ID, PROJECT_ID, SUPERVISOR_ID = 0;
 
     private static int EMPLOYEE_REQUEST = 1000;
@@ -86,6 +92,8 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
                 finish();
             }
         });
+
+
 
         setTitle(getResources().getString(R.string.new_travel));
 
@@ -134,12 +142,29 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
                     popupBuilderString(linearLayout, i);
 
                     builder.show();
+                }else if(inputForms.get(i).getTYPE().equals("COUNTDATA")){
+
+                    builder = new AlertDialog.Builder(DetailTravelActivity.this);
+
+                    TextView tvTitle = new TextView(DetailTravelActivity.this);
+                    tvTitle.setText(inputForms.get(i).getLABEL());
+                    tvTitle.setTextSize(18);
+                    tvTitle.setTypeface(null, Typeface.BOLD);
+                    tvTitle.setPadding(70, 40, 70, 40);
+
+                    builder.setCustomTitle(tvTitle);
+
+                    popupBuilderInt(linearLayout, i);
+
+                    builder.show();
                 }else if(inputForms.get(i).getTYPE().equals("EMPLOYEE")){
                     Intent intent = new Intent(DetailTravelActivity.this, EmployeeActivity.class);
                     startActivityForResult(intent, 1000);
                 }else if(inputForms.get(i).getTYPE().equals("PROJECT")){
                     Intent intent = new Intent(DetailTravelActivity.this, ProjectActivity.class);
                     startActivityForResult(intent, 1000);
+                }else if(inputForms.get(i).getTYPE().equals("VIEWTEXT")){
+
                 }
             }
         });
@@ -154,11 +179,12 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        setDate(_index, helper.zeroPadLeft(i) + "-" + helper.zeroPadLeft(i1+1) + "-" + helper.zeroPadLeft(i2));
+        setDate(_index, helper.zeroPadLeft(i2) + "-" + helper.zeroPadLeft(i1+1) + "-" + helper.zeroPadLeft(i));
     }
 
     public void setDate(int position, String date){
         inputForms.get(position).setVALUE(date);
+        inputForms.get(position).setHIDEVALUE(date);
         adapter.notifyDataSetChanged();
     }
 
@@ -190,6 +216,45 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
             @Override
             public void onClick(DialogInterface dialogInterface, int position) {
                 inputForms.get(_index).setVALUE(popupEditText.getText().toString());
+                inputForms.get(_index).setHIDEVALUE(popupEditText.getText().toString());
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        builder.setView(v);
+        builder.create().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+    }
+    public void popupBuilderInt(View v, int position){
+
+        popupEditText = new EditText(DetailTravelActivity.this);
+        popupEditText.setMaxLines(1);
+        popupEditText.setBackgroundColor(Color.TRANSPARENT);
+        popupEditText.setPadding(30,30,30,30);
+        popupEditText.setBackgroundResource(R.drawable.popup_edittext);
+        popupEditText.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        );
+        popupEditText.requestFocus();
+        popupEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        popupEditText.setRawInputType(Configuration.KEYBOARD_12KEY);
+        popupEditText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager keyboard = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                keyboard.showSoftInput(popupEditText, 0);
+            }
+        },200);
+
+        ((LinearLayout)v).addView(popupEditText);
+
+        builder.setCancelable(true);
+        builder.setNegativeButton("Cancel", null);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int position) {
+                inputForms.get(_index).setVALUE(popupEditText.getText().toString());
+                inputForms.get(_index).setHIDEVALUE(popupEditText.getText().toString());
                 adapter.notifyDataSetChanged();
             }
         });
@@ -199,20 +264,36 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
     }
 
     public void generateData(){
+        DbUserData db = new DbUserData(DetailTravelActivity.this);
+        List<UserData> UserDataList = db.getAllUserDataList();
+        for (UserData userData : UserDataList) {
+            if (!userData.getEMPLOYEE_ID().isEmpty()) {
+                is_admin = userData.getIS_ADMIN();
+                employee_id = userData.getEMPLOYEE_ID();
+                employee_name = userData.getEMPLOYEE_NAME();
+                atasan_name = userData.getATASAN_NAME();
+                atasan_id = userData.getATASAN_ID();
+                //Toast.makeText(this, atasan_name, Toast.LENGTH_LONG).show();
+
+
+            }
+        }
         inputForms = new ArrayList<InputForm>();
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
         inputForm.setTYPE("DATEPICKER");
         inputForm.setLABEL("Dari Tanggal");
-        inputForm.setVALUE(helper.zeroPadLeft(year) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(day));
+        inputForm.setVALUE( helper.zeroPadLeft(day)+ "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(year));
+        inputForm.setHIDEVALUE( helper.zeroPadLeft(day)+ "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(year));
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
         inputForm.setTYPE("DATEPICKER");
         inputForm.setLABEL("Sampai Tanggal");
-        inputForm.setVALUE(helper.zeroPadLeft(year) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(day));
+        inputForm.setVALUE(helper.zeroPadLeft(day) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(year));
+        inputForm.setHIDEVALUE(helper.zeroPadLeft(day) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(year));
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
@@ -220,13 +301,15 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
         inputForm.setTYPE("EDITTEXT");
         inputForm.setLABEL("Tujuan & Aktifitas");
         inputForm.setVALUE("Onsite/Meeting/Dll");
+        inputForm.setHIDEVALUE("-");
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_person));
-        inputForm.setTYPE("EMPLOYEE");
+        inputForm.setTYPE("VIEWTEXT");
         inputForm.setLABEL("Diajukan Oleh");
-        inputForm.setVALUE("Cep Johnson");
+        inputForm.setVALUE(employee_name);
+        inputForm.setHIDEVALUE(employee_id);
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
@@ -234,13 +317,23 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
         inputForm.setTYPE("PROJECT");
         inputForm.setLABEL("Proyek");
         inputForm.setVALUE("Tidak ada proyek");
+        inputForm.setHIDEVALUE("0");
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_person));
-        inputForm.setTYPE("EMPLOYEE");
+        inputForm.setTYPE("VIEWTEXT");
         inputForm.setLABEL("Atasan");
-        inputForm.setVALUE("Tidak ada atasan");
+        inputForm.setVALUE(atasan_name);
+        inputForm.setHIDEVALUE(atasan_id);
+        inputForms.add(inputForm);
+
+        inputForm = new InputForm();
+        inputForm.setICON(getResources().getDrawable(R.drawable.ic_travel));
+        inputForm.setTYPE("COUNTDATA");
+        inputForm.setLABEL("Jumlah Peserta");
+        inputForm.setVALUE("1");
+        inputForm.setHIDEVALUE("1");
         inputForms.add(inputForm);
     }
 
@@ -249,6 +342,7 @@ public class DetailTravelActivity extends AppCompatActivity implements DatePicke
         if (requestCode == EMPLOYEE_REQUEST) {
             if (resultCode == RESULT_OK) {
                 inputForms.get(_index).setVALUE(data.getStringExtra("FULLNAME"));
+                inputForms.get(_index).setHIDEVALUE(data.getStringExtra("ID"));
                 EMPLOYEE_ID = Integer.parseInt(data.getStringExtra("ID"));
                 adapter.notifyDataSetChanged();
             }

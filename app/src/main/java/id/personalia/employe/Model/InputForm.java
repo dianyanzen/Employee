@@ -26,6 +26,10 @@ public class InputForm {
     @Expose
     private String VALUE;
 
+    @SerializedName("HIDEVALUE")
+    @Expose
+    private String HIDEVALUE;
+
     public Drawable getICON() {
         return ICON;
     }
@@ -56,6 +60,14 @@ public class InputForm {
 
     public void setVALUE(String VALUE) {
         this.VALUE = VALUE;
+    }
+
+    public String getHIDEVALUE() {
+        return HIDEVALUE;
+    }
+
+    public void setHIDEVALUE(String HIDEVALUE) {
+        this.HIDEVALUE = HIDEVALUE;
     }
 
 }

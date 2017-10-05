@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.personalia.employe.Activity.OcAttendance;
 import id.personalia.employe.Model.Attendance;
@@ -20,100 +22,202 @@ import id.personalia.employe.R;
  * Created by Dian Yanzen on 9/14/2017.
  */
 
-public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.ViewHolder>{
-    ArrayList<Attendance> Attendances;
-    Context context;
+public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public AttendanceAdapter(Context context, int resource, ArrayList<Attendance> object) {
-        this.context = context;
-        this.Attendances = object;
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
+    private final int VIEW_TYPE_EMPTY = 2;
+
+    private boolean loading = true;
+
+    private List<Attendance> Attendances;
+    private ItemClickListener ItemClickListener;
+    private Context context;
+    public AttendanceAdapter(Context current) {
+        this.context = current;
+        Attendances = new ArrayList<>();
     }
 
-    @Override
-    public AttendanceAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.attendance_list_layout, parent, false);
-
-        return new AttendanceAdapter.ViewHolder(itemView);
+    private void add(Attendance item) {
+        Attendances.add(item);
+        notifyItemInserted(Attendances.size());
     }
 
-    @Override
-    public void onBindViewHolder(AttendanceAdapter.ViewHolder holder, int position) {
-        final Attendance m = Attendances.get(position);
-
-        switch (Attendances.get(position).getATTSTATUS()){
-            case "Menunggu":
-                holder.attiv_status.setImageResource(R.drawable.ic_clock);
-                holder.attiv_status.setColorFilter(context.getResources().getColor(R.color.arkaOrange));
-                break;
-            case "":
-                holder.attiv_status.setImageResource(R.drawable.ic_done);
-                holder.attiv_status.setColorFilter(context.getResources().getColor(R.color.arkaGreen));
-                break;
+    public void addAll(List<Attendance> Trevels) {
+        for (Attendance attendance : Trevels) {
+            add(attendance);
         }
+    }
 
-        holder.attiv_status.setPadding(10,10,10,10);
+    public void remove(Attendance item) {
+        int position = Attendances.indexOf(item);
+        if (position > -1) {
+            Attendances.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
 
-        holder.atttv_tanggal.setText(m.getATTTANGGAL());
-        holder.atttv_descrip.setText(m.getATTDESCRIP());
-        holder.atttv_lama.setText(m.getATTLAMA());
-        holder.atttv_diajukan.setText(m.getATTDIAJUKAN());
-        holder.setClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position, boolean isLongClick) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                if (isLongClick) {
-                    //Toast.makeText(context, "Cukup Tekan Sekali Untuk Menampilkan Rincian Data", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    Intent intent = new Intent(activity, OcAttendance.class);
-                    intent.putExtra("ATTTANGGAL", Attendances.get(position).getATTTANGGAL()); //you can name the keys whatever you like
-                    intent.putExtra("ATTDESCRIP", Attendances.get(position).getATTDESCRIP()); //note that all these values have to be primitive (i.e boolean, int, double, String, etc.)
-                    intent.putExtra("ATTLAMA", Attendances.get(position).getATTLAMA());
-                    intent.putExtra("ATTDIAJUKAN", Attendances.get(position).getATTDIAJUKAN());
-                    switch (Attendances.get(position).getATTSTATUS()){
-                        case "Menunggu":
-                            intent.putExtra("ATTSTATUS", "Menunggu");
-                            break;
-                        case "Batal":
-                            intent.putExtra("ATTSTATUS", "Batal");
-                            break;
-                        case "":
-                            intent.putExtra("ATTSTATUS", "Beres");
-                            break;
-                    }
-                    activity.startActivity(intent);
-                }
+    public void clear() {
+        int size = this.Attendances.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                this.Attendances.remove(0);
             }
 
-        });
+            this.notifyItemRangeRemoved(0, size);
+        }
+    }
 
+    public Attendance getItem(int position){
+        return Attendances.get(position);
+    }
+
+    @Override
+    public int getItemViewType (int position) {
+            if(isPositionFooter (0)) {
+                return VIEW_TYPE_EMPTY;
+            }
+            else if (isPositionFooter(position)) {
+                return VIEW_TYPE_LOADING;
+            }
+            return VIEW_TYPE_ITEM;
+    }
+
+    private boolean isPositionFooter (int position) {
+        return position == Attendances.size();
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.attendance_list_layout, parent, false);
+            return new attendanceViewHolder(view, ItemClickListener);
+        } else if (viewType == VIEW_TYPE_LOADING) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.progressbar_item, parent, false);
+            return new LoadingViewHolder(view);
+        } else if (viewType == VIEW_TYPE_EMPTY) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.empty_list, parent, false);
+            return new emptyViewHolder(view);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        if (holder instanceof attendanceViewHolder) {
+            attendanceViewHolder attendanceViewHolder = (attendanceViewHolder) holder;
+
+            final Attendance attendance = Attendances.get(position);
+            attendanceViewHolder.treveliv_img.setImageResource(R.drawable.def_attendance);
+
+            switch (attendance.getATTSTATUS()){
+                case "Menunggu":
+                    attendanceViewHolder.attendanceiv_status.setImageResource(R.drawable.ic_clock);
+                    attendanceViewHolder.attendanceiv_status.setColorFilter(context.getResources().getColor(R.color.arkaOrange));
+                    break;
+                case "Disetujui":
+                    attendanceViewHolder.attendanceiv_status.setImageResource(R.drawable.ic_done);
+                    attendanceViewHolder.attendanceiv_status.setColorFilter(context.getResources().getColor(R.color.arkaGreen));
+                    break;
+                case "Ditolak":
+                    attendanceViewHolder.attendanceiv_status.setImageResource(R.drawable.ic_clear);
+                    attendanceViewHolder.attendanceiv_status.setColorFilter(context.getResources().getColor(R.color.arkaRed));
+                    break;
+            }
+
+            attendanceViewHolder.attendanceiv_status.setPadding(10,10,10,10);
+            attendanceViewHolder.attendancetv_tanggal.setText(attendance.getATTTANGGAL());
+            attendanceViewHolder.attendancetv_diajukan.setText(attendance.getATTDIAJUKAN());
+            attendanceViewHolder.attendancetv_deskripsi.setText(attendance.getATTDESCRIP());
+            attendanceViewHolder.attendancetv_jumlah.setText(attendance.getATTLAMA());
+            attendanceViewHolder.setClickListener(new ItemClickListener() {
+                @Override
+                public void onClick(View view, int position, boolean isLongClick) {
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    if (isLongClick) {
+                        //Toast.makeText(context, "Cukup Tekan Sekali Untuk Menampilkan Rincian Data", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Intent intent = new Intent(activity, OcAttendance.class);
+                        intent.putExtra("ATTTANGGAL", Attendances.get(position).getATTTANGGAL()); //you can name the keys whatever you like
+                        intent.putExtra("ATTDIAJUKAN", Attendances.get(position).getATTDIAJUKAN()); //note that all these values have to be primitive (i.e boolean, int, double, String, etc.)
+                        intent.putExtra("ATTDESCRIP", Attendances.get(position).getATTDESCRIP());
+                        intent.putExtra("ATTLAMA", Attendances.get(position).getATTLAMA());
+                        switch (Attendances.get(position).getATTSTATUS()){
+                            case "Menunggu":
+                                intent.putExtra("ATTSTATUS", "Menunggu");
+                                break;
+                            case "Disetujui":
+                                intent.putExtra("ATTSTATUS", "Disetujui");
+                                break;
+                            case "Ditolak":
+                                intent.putExtra("ATTSTATUS", "Ditolak");
+                                break;
+                        }
+                        activity.startActivity(intent);
+                    }
+                }
+
+            });
+
+
+        } else if (holder instanceof LoadingViewHolder) {
+            LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
+            loadingViewHolder.progressBar.setIndeterminate(true);
+            loadingViewHolder.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        } else if (holder instanceof emptyViewHolder) {
+            emptyViewHolder EmptyViewHolder = (emptyViewHolder) holder;
+            EmptyViewHolder.empty_text.setText("Tidak Ada Data Izin Kehadiran\nYang Dapat Ditampilkan");
+        }
+
+    }
+
+    public void setLoading(boolean loading){
+        this.loading = loading;
     }
 
     @Override
     public int getItemCount() {
-        return Attendances.size();
+        return Attendances == null ? 0 : Attendances.size() + 1;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private ItemClickListener clickListener;
-        ImageView attiv_status;
-        TextView atttv_tanggal, atttv_descrip, atttv_lama,atttv_diajukan;
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 
-        public ViewHolder(View itemView) {
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+    }
+    static class emptyViewHolder extends RecyclerView.ViewHolder {
+        TextView empty_text;
+        public emptyViewHolder(View itemView) {
+            super(itemView);
+            empty_text = (TextView) itemView.findViewById(R.id.empty_text);
+        }
+    }
+
+    static class attendanceViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener, View.OnLongClickListener {
+        private ItemClickListener clickListener;
+        ImageView attendanceiv_status, treveliv_img;
+        TextView attendancetv_tanggal, attendancetv_diajukan, attendancetv_deskripsi,attendancetv_jumlah;
+
+
+        public attendanceViewHolder(View itemView, ItemClickListener ItemClickListener) {
             super(itemView);
 
-            attiv_status = (ImageView)itemView.findViewById(R.id.attiv_status);
-            atttv_tanggal = (TextView)itemView.findViewById(R.id.atttv_tanggal);
-            atttv_descrip = (TextView)itemView.findViewById(R.id.atttv_descrip);
-            atttv_lama = (TextView)itemView.findViewById(R.id.atttv_lama);
-            atttv_diajukan = (TextView)itemView.findViewById(R.id.atttv_diajukan);
+            attendanceiv_status = (ImageView) itemView.findViewById(R.id.attiv_status);
+            treveliv_img = (ImageView) itemView.findViewById(R.id.attimageView);
+            attendancetv_tanggal = (TextView) itemView.findViewById(R.id.atttv_tanggal);
+            attendancetv_diajukan = (TextView) itemView.findViewById(R.id.atttv_diajukan);
+            attendancetv_deskripsi = (TextView) itemView.findViewById(R.id.atttv_descrip);
+            attendancetv_jumlah = (TextView) itemView.findViewById(R.id.atttv_lama);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-
         }
 
         public void setClickListener(ItemClickListener itemClickListener) {
@@ -131,7 +235,20 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
             return true;
 
         }
+
     }
+
+    static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+
+        public LoadingViewHolder(View itemView) {
+            super(itemView);
+
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar1);
+        }
+    }
+
+
     public interface ItemClickListener {
         void onClick(View view, int position, boolean isLongClick);
 

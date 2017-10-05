@@ -28,6 +28,7 @@ import id.personalia.employe.Activity.ProjectActivityDisplay;
 import id.personalia.employe.Fragment.AttendanceFragment;
 import id.personalia.employe.Fragment.ClaimFragment;
 import id.personalia.employe.Fragment.OvertimeFragment;
+import id.personalia.employe.Fragment.PresensiFragment;
 import id.personalia.employe.Fragment.ReportFragment;
 import id.personalia.employe.Fragment.TravelFragment;
 import id.personalia.employe.Model.Dashboard;
@@ -135,8 +136,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                 if (isLongClick) {
                     switch (Dashboards.get(position).getMAIN()){
                         case "Clock In":
-                            Intent intent = new Intent(activity, DetailReportActivity.class);
-                            activity.startActivity(intent);
+                            PresensiFragment fragmentpresensi = new PresensiFragment();
+                            Bundle arguments = new Bundle();
+                            arguments.putString( "lada" , "lada");
+                            fragmentpresensi.setArguments(arguments);
+                            android.support.v4.app.FragmentTransaction fragmentTransactionPresensi = activity.getSupportFragmentManager().beginTransaction();
+                            fragmentTransactionPresensi.replace(R.id.fragment_container, fragmentpresensi, "PRESENSI");
+                            fragmentTransactionPresensi.addToBackStack("PRESENSI");
+                            fragmentTransactionPresensi.commit();
                             break;
                         case "Dinas Luar":
                             TravelFragment fragmenttravel = new TravelFragment();
@@ -199,8 +206,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                 } else {
                     switch (Dashboards.get(position).getMAIN()) {
                         case "Clock In":
-                            Intent intent = new Intent(activity, DetailReportActivity.class);
-                            activity.startActivity(intent);
+                            //Intent intent = new Intent(activity, DetailReportActivity.class);
+                            //activity.startActivity(intent);
+                            PresensiFragment fragmentpresensi = new PresensiFragment();
+                            android.support.v4.app.FragmentTransaction fragmentTransactionPresensi = activity.getSupportFragmentManager().beginTransaction();
+                            fragmentTransactionPresensi.replace(R.id.fragment_container, fragmentpresensi, "PRESENSI");
+                            fragmentTransactionPresensi.addToBackStack("PRESENSI");
+                            fragmentTransactionPresensi.commit();
                             break;
                         case "Dinas Luar":
                             TravelFragment fragmenttravel = new TravelFragment();

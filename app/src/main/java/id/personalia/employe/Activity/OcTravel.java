@@ -55,7 +55,7 @@ public class OcTravel extends AppCompatActivity implements DatePickerDialog.OnDa
     AlertDialog.Builder builder;
     EditText popupEditText;
     SearchView sv;
-    String travel_tujuan,travel_tanggal,travel_proyek,travel_status;
+    String travel_tujuan,travel_tanggal,travel_proyek,travel_status,travel_long,travel_participant,travel_aproval;
     int EMPLOYEE_ID, PROJECT_ID, SUPERVISOR_ID = 0;
 
     private static int EMPLOYEE_REQUEST = 1000;
@@ -71,6 +71,9 @@ public class OcTravel extends AppCompatActivity implements DatePickerDialog.OnDa
         travel_tanggal = intent.getStringExtra("travel_tanggal");
         travel_proyek = intent.getStringExtra("travel_proyek");
         travel_status = intent.getStringExtra("travel_status");
+        travel_long = intent.getStringExtra("travel_long");
+        travel_aproval = intent.getStringExtra("travel_aproval");
+        travel_participant = intent.getStringExtra("travel_participant");
         setContentView(R.layout.activity_detail_travel);
 
         helper = new ArkaHelper(OcTravel.this);
@@ -233,6 +236,27 @@ public class OcTravel extends AppCompatActivity implements DatePickerDialog.OnDa
     inputForm.setTYPE("VIEWTEXT");
     inputForm.setLABEL("Proyek");
     inputForm.setVALUE(travel_proyek);
+    inputForms.add(inputForm);
+
+    inputForm = new InputForm();
+    inputForm.setICON(getResources().getDrawable(R.drawable.ic_person));
+    inputForm.setTYPE("VIEWTEXT");
+    inputForm.setLABEL("Diajukan Oleh");
+    inputForm.setVALUE(travel_aproval);
+    inputForms.add(inputForm);
+
+    inputForm = new InputForm();
+    inputForm.setICON(getResources().getDrawable(R.drawable.ic_travel));
+    inputForm.setTYPE("VIEWTEXT");
+    inputForm.setLABEL("Peserta");
+    inputForm.setVALUE(travel_participant);
+    inputForms.add(inputForm);
+
+    inputForm = new InputForm();
+    inputForm.setICON(getResources().getDrawable(R.drawable.ic_clock));
+    inputForm.setTYPE("VIEWTEXT");
+    inputForm.setLABEL("Lama");
+    inputForm.setVALUE(travel_long);
     inputForms.add(inputForm);
 
     inputForm = new InputForm();

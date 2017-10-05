@@ -97,8 +97,19 @@ public class SearchReportActivity extends AppCompatActivity implements DatePicke
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                String from_dt = inputForms.get(0).getLABEL().toString();
+                String to_dt = inputForms.get(1).getLABEL().toString();
+                String vfrom_dt = inputForms.get(0).getVALUE().toString();
+                String vto_dt = inputForms.get(1).getVALUE().toString();
+                Snackbar.make(view, from_dt+": "+vfrom_dt+"\n"+to_dt+": "+vto_dt, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent = new Intent(SearchReportActivity.this, Activity_Main.class);
+                intent.putExtra("FragmentNM", "Report");
+                intent.putExtra("param1", from_dt);
+                intent.putExtra("param2", to_dt);
+                intent.putExtra("val1", vfrom_dt);
+                intent.putExtra("val2", vto_dt);
+                startActivity(intent);
             }
         });
 
@@ -157,7 +168,7 @@ public class SearchReportActivity extends AppCompatActivity implements DatePicke
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        setDate(_index, helper.zeroPadLeft(i) + "-" + helper.zeroPadLeft(i1+1) + "-" + helper.zeroPadLeft(i2));
+        setDate(_index, helper.zeroPadLeft(i2) + "-" + helper.zeroPadLeft(i1+1) + "-" + helper.zeroPadLeft(i));
     }
 
     public void setDate(int position, String date){
@@ -213,14 +224,14 @@ public class SearchReportActivity extends AppCompatActivity implements DatePicke
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
         inputForm.setTYPE("DATEPICKER");
         inputForm.setLABEL("Dari Tanggal");
-        inputForm.setVALUE(helper.zeroPadLeft(year) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(day));
+        inputForm.setVALUE(helper.zeroPadLeft(day)+ "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(year));
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
         inputForm.setTYPE("DATEPICKER");
         inputForm.setLABEL("Sampai Tanggal");
-        inputForm.setVALUE(helper.zeroPadLeft(year) + "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(day));
+        inputForm.setVALUE(helper.zeroPadLeft(day)+ "-" + helper.zeroPadLeft(month+1) + "-" + helper.zeroPadLeft(year));
         inputForms.add(inputForm);
 
     }

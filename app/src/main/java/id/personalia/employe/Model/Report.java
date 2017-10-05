@@ -1,5 +1,8 @@
 package id.personalia.employe.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,51 +10,59 @@ import com.google.gson.annotations.SerializedName;
  * Created by Dian Yanzen on 9/14/2017.
  */
 
-public class Report {
+public class Report implements Parcelable {
     // Variable
-    @SerializedName("RPNAMA")
-    @Expose
+    private int id;
     private String RPNAMA;
-
-    @SerializedName("RPTANGGAL")
-    @Expose
     private String RPTANGGAL;
-
-    @SerializedName("RPJABATAN")
-    @Expose
     private String RPJABATAN;
-
-    @SerializedName("RPCL_IN")
-    @Expose
     private String RPCL_IN;
-
-    @SerializedName("RPCL_OUT")
-    @Expose
     private String RPCL_OUT;
-
-    @SerializedName("RPWORKHOUR")
-    @Expose
     private String RPWORKHOUR;
-
-    @SerializedName("RPSTATUS")
-    @Expose
     private String RPSTATUS;
-
-    @SerializedName("RPNOREG")
-    @Expose
     private String RPNOREG;
-
-    @SerializedName("RPGOL")
-    @Expose
     private String RPGOL;
+
+    public Report(){
+
+    }
+    protected Report(Parcel in){
+        id = in.readInt();
+        RPNAMA = in.readString();
+        RPTANGGAL = in.readString();
+        RPJABATAN = in.readString();
+        RPCL_IN = in.readString();
+        RPCL_OUT = in.readString();
+        RPWORKHOUR = in.readString();
+        RPSTATUS = in.readString();
+        RPNOREG = in.readString();
+        RPGOL = in.readString();
+
+    }
+    public static final Parcelable.Creator<Report> CREATOR = new Parcelable.Creator<Report>() {
+        @Override
+        public Report createFromParcel(Parcel in) {
+            return new Report(in);
+        }
+
+        @Override
+        public Report[] newArray(int size) {
+            return new Report[size];
+        }
+    };
+
     // Function
-    public String getRPNAMA() {
-        return RPNAMA;
+    public int getID() {
+        return id;
     }
 
-    public void setRPNAMA(String RPNAMA) {
-        this.RPNAMA = RPNAMA;
+    public void setID(int id) {
+        this.id = id;
     }
+
+    public String getRPNAMA() { return RPNAMA; }
+
+    public void setRPNAMA(String RPNAMA) { this.RPNAMA = RPNAMA; }
 
     public String getRPTANGGAL() {
         return RPTANGGAL;
@@ -110,4 +121,23 @@ public class Report {
     }
 
     public void setRPGOL(String RPGOL) { this.RPGOL = RPGOL; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(RPNAMA);
+        dest.writeString(RPTANGGAL);
+        dest.writeString(RPJABATAN);
+        dest.writeString(RPCL_IN);
+        dest.writeString(RPCL_OUT);
+        dest.writeString(RPWORKHOUR);
+        dest.writeString(RPSTATUS);
+        dest.writeString(RPNOREG);
+        dest.writeString(RPGOL);
+    }
 }

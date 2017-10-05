@@ -14,6 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.List;
+
+import id.personalia.employe.Helper.DbUserData;
+import id.personalia.employe.Model.UserData;
 import id.personalia.employe.R;
 
 import static android.content.ContentValues.TAG;
@@ -25,7 +29,7 @@ import static android.content.ContentValues.TAG;
 public class Activity_Splash extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     private final int SPLASH_DISPLAY_LENGTH = 3000;
-
+    DbUserData db = new DbUserData(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +39,39 @@ public class Activity_Splash extends AppCompatActivity {
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
                 // Todo: Check login session, kalau belum login maka direct ke Login Activity class
-                Intent mainIntent = new Intent(Activity_Splash.this, Activity_Main.class);
-                startActivity(mainIntent);
-                finish();
+                //Intent mainIntent = new Intent(Activity_Splash.this, Activity_Login.class);
+                //startActivity(mainIntent);
+                //finish();
+                ceklogin();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
+    public void ceklogin(){
+       // try{
+            List<UserData> UserDataList = db.getAllUserDataList();
+            int number = UserDataList.size();
+            //String employee_id = userData.getEMPLOYEE_ID();
+            //Log.e("Data",employee_id);
+            if(number > 0 ){
+                Intent mainIntent = new Intent(Activity_Splash.this, Activity_Main.class);
+                mainIntent.putExtra("FragmentNM", "Dashboard");
+                startActivity(mainIntent);
+                finish();
+            }else{
+                Intent mainIntent = new Intent(Activity_Splash.this, Activity_Login.class);
+                startActivity(mainIntent);
+                finish();
+            }
+        //} catch(Exception e){
+          //  db.deleteAllUserData();
+           // Intent mainIntent = new Intent(Activity_Splash.this, Activity_Login.class);
+           // startActivity(mainIntent);
+           // finish();
+        //}
+
+
+
+    }
+
 
 }

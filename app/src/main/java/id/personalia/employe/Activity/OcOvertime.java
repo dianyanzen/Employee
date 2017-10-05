@@ -54,7 +54,7 @@ public class OcOvertime extends AppCompatActivity implements DatePickerDialog.On
     AlertDialog.Builder builder;
     EditText popupEditText;
     SearchView sv;
-    String OTTANGGAL,OTDIAJUKAN,OTJAMLEMBUR,OTKALKULASI,OTJUMLAH,OTSTATUS,OTKETERANGAN;
+    String OTTANGGAL,OTDIAJUKAN,OTJAMLEMBUR,OTKALKULASI,OTJUMLAH,OTSTATUS,OTKETERANGAN,OTUANG;
 
     int EMPLOYEE_ID, PROJECT_ID, SUPERVISOR_ID = 0;
 
@@ -71,6 +71,7 @@ public class OcOvertime extends AppCompatActivity implements DatePickerDialog.On
         OTJAMLEMBUR = intent.getStringExtra("OTJAMLEMBUR");
         OTKALKULASI = intent.getStringExtra("OTKALKULASI");
         OTJUMLAH = intent.getStringExtra("OTJUMLAH");
+        OTUANG = intent.getStringExtra("OTUANG");
         OTSTATUS = intent.getStringExtra("OTSTATUS");
         setContentView(R.layout.activity_detail_overtime);
 
@@ -236,16 +237,23 @@ public class OcOvertime extends AppCompatActivity implements DatePickerDialog.On
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
+        inputForm.setICON(getResources().getDrawable(R.drawable.ic_monetization));
+        inputForm.setTYPE("VIEWTEXT");
+        inputForm.setLABEL("Jumlah Uang");
+        inputForm.setVALUE(OTUANG);
+        inputForms.add(inputForm);
+
+        inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_clock));
         inputForm.setTYPE("VIEWTEXT");
-        inputForm.setLABEL("Jam Lembur");
+        inputForm.setLABEL("Dari Jam");
         inputForm.setVALUE(OTJAMLEMBUR);
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_clock));
         inputForm.setTYPE("VIEWTEXT");
-        inputForm.setLABEL("Kalkulasi");
+        inputForm.setLABEL("Sampai Jam");
         inputForm.setVALUE(OTKALKULASI);
         inputForms.add(inputForm);
 

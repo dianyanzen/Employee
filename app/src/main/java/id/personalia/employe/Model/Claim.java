@@ -1,5 +1,8 @@
 package id.personalia.employe.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,29 +10,46 @@ import com.google.gson.annotations.SerializedName;
  * Created by Dian Yanzen on 9/14/2017.
  */
 
-public class Claim {
-    // Variable
-    @SerializedName("CLNMPENGAJU")
-    @Expose
+public class Claim implements Parcelable
+{
+
+    private int id;
     private String CLNMPENGAJU;
-
-    @SerializedName("CLTTANGGAL")
-    @Expose
     private String CLTTANGGAL;
-
-    @SerializedName("CLJUMLAH")
-    @Expose
     private String CLJUMLAH;
-
-    @SerializedName("CLDESKRIKSI")
-    @Expose
     private String CLDESKRIKSI;
-
-    @SerializedName("CLSTATUS")
-    @Expose
+    private String CLDESCRIPTION;
     private String CLSTATUS;
 
-    // Function
+    public Claim() {
+
+
+    }
+
+    protected Claim(Parcel in) {
+        id = in.readInt();
+        CLNMPENGAJU = in.readString();
+        CLTTANGGAL = in.readString();
+        CLJUMLAH = in.readString();
+        CLDESKRIKSI = in.readString();
+        CLDESCRIPTION = in.readString();
+        CLSTATUS = in.readString();
+    }
+        public static final Parcelable.Creator<Claim> CREATOR = new Parcelable.Creator<Claim>() {
+            @Override
+            public Claim createFromParcel(Parcel in) {
+                return new Claim(in);
+            }
+
+            @Override
+            public Claim[] newArray(int size) {
+                return new Claim[size];
+            }
+        };
+
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
     public String getCLNMPENGAJU() {
         return CLNMPENGAJU;
     }
@@ -63,6 +83,14 @@ public class Claim {
         this.CLDESKRIKSI = CLDESKRIKSI;
     }
 
+    public String getCLDESCRIPTION() {
+        return CLDESCRIPTION;
+    }
+
+    public void setCLDESCRIPTION(String CLDESCRIPTION) {
+        this.CLDESCRIPTION = CLDESCRIPTION;
+    }
+
     public String getCLSTATUS() {
         return CLSTATUS;
     }
@@ -70,5 +98,19 @@ public class Claim {
     public void setCLSTATUS(String CLSTATUS) {
         this.CLSTATUS = CLSTATUS;
     }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(CLNMPENGAJU);
+        dest.writeString(CLTTANGGAL);
+        dest.writeString(CLJUMLAH);
+        dest.writeString(CLDESKRIKSI);
+        dest.writeString(CLDESCRIPTION);
+        dest.writeString(CLSTATUS);
+    }
 }

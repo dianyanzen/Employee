@@ -23,6 +23,10 @@
         <item name="colorButtonNormal">@color/arkaButtonColor</item>
         <item name="android:textColor">@color/arkaButtonTextColor</item>
     </style>
+    <style name="ArkaButtonBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorButtonNormal">@color/colorFAB1</item>
+        <item name="android:textColor">@color/arkaButtonTextColor</item>
+    </style>
 
     <style name="ArkaTextInputLayout">
         <item name="android:textColor">@color/arkaEditTextNormal</item>

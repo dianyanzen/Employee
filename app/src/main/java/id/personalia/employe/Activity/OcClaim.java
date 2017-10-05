@@ -54,7 +54,7 @@ public class OcClaim extends AppCompatActivity implements DatePickerDialog.OnDat
     AlertDialog.Builder builder;
     EditText popupEditText;
     SearchView sv;
-    String CLNMPENGAJU,CLTTANGGAL,CLDESKRIKSI,CLJUMLAH,CLSTATUS;
+    String CLNMPENGAJU,CLTTANGGAL,CLDESKRIKSI,CLJUMLAH,CLSTATUS,CLDESCRIPTION;
 
     int EMPLOYEE_ID, PROJECT_ID, SUPERVISOR_ID = 0;
 
@@ -68,6 +68,7 @@ public class OcClaim extends AppCompatActivity implements DatePickerDialog.OnDat
         CLNMPENGAJU = intent.getStringExtra("CLNMPENGAJU");
         CLTTANGGAL = intent.getStringExtra("CLTTANGGAL");
         CLDESKRIKSI = intent.getStringExtra("CLDESKRIKSI");
+        CLDESCRIPTION = intent.getStringExtra("CLDESCRIPTION");
         CLJUMLAH = intent.getStringExtra("CLJUMLAH");
         CLSTATUS = intent.getStringExtra("CLSTATUS");
         setContentView(R.layout.activity_detail_claim);
@@ -222,21 +223,21 @@ public class OcClaim extends AppCompatActivity implements DatePickerDialog.OnDat
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_mode_edit));
         inputForm.setTYPE("VIEWTEXT");
         inputForm.setLABEL("Jenis Reimburse");
-        inputForm.setVALUE(CLNMPENGAJU);
+        inputForm.setVALUE(CLDESKRIKSI);
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_claim));
         inputForm.setTYPE("VIEWTEXT");
         inputForm.setLABEL("Keperluan/Keterangan");
-        inputForm.setVALUE("Tidak Ada Keperluan");
+        inputForm.setVALUE(CLDESCRIPTION);
         inputForms.add(inputForm);
 
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_person));
         inputForm.setTYPE("VIEWTEXT");
         inputForm.setLABEL("Diajukan Oleh");
-        inputForm.setVALUE(CLDESKRIKSI);
+        inputForm.setVALUE(CLNMPENGAJU);
         inputForms.add(inputForm);
 
         inputForm = new InputForm();

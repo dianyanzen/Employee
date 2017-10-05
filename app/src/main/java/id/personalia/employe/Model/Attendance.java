@@ -1,5 +1,8 @@
 package id.personalia.employe.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,30 +10,44 @@ import com.google.gson.annotations.SerializedName;
  * Created by Dian Yanzen on 9/14/2017.
  */
 
-public class Attendance {
-    // Variable
-    @SerializedName("ATTLAMA")
-    @Expose
-    private String ATTLAMA;
-
-    @SerializedName("ATTTANGGAL")
-    @Expose
+public class Attendance implements Parcelable {
+    private int id;
     private String ATTTANGGAL;
-
-    @SerializedName("ATTDESCRIP")
-    @Expose
+    private String ATTLAMA;
     private String ATTDESCRIP;
-
-    @SerializedName("ATTDIAJUKAN")
-    @Expose
     private String ATTDIAJUKAN;
-
-    @SerializedName("ATTSTATUS")
-    @Expose
     private String ATTSTATUS;
+
+    public Attendance() {
+
+    }
+
+    protected Attendance(Parcel in) {
+        id = in.readInt();
+        ATTTANGGAL = in.readString();
+        ATTLAMA = in.readString();
+        ATTDESCRIP = in.readString();
+        ATTDIAJUKAN = in.readString();
+        ATTSTATUS = in.readString();
+    }
+    public static final Parcelable.Creator<Attendance> CREATOR = new Parcelable.Creator<Attendance>() {
+        @Override
+        public Attendance createFromParcel(Parcel in) {
+            return new Attendance(in);
+        }
+
+        @Override
+        public Attendance[] newArray(int size) {
+            return new Attendance[size];
+        }
+    };
 
 
     // Function
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
+
     public String getATTTANGGAL() {
         return ATTTANGGAL;
     }
@@ -68,5 +85,18 @@ public class Attendance {
     }
 
     public void setATTSTATUS(String ATTSTATUS) { this.ATTSTATUS = ATTSTATUS; }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(ATTTANGGAL);
+        dest.writeString(ATTLAMA);
+        dest.writeString(ATTDESCRIP);
+        dest.writeString(ATTDIAJUKAN);
+        dest.writeString(ATTSTATUS);
+    }
 }

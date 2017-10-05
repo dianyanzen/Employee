@@ -58,7 +58,7 @@ public class OcReport extends AppCompatActivity implements DatePickerDialog.OnDa
     AlertDialog.Builder builder;
     EditText popupEditText;
     SearchView sv;
-    String RPTANGGAL,RPCL_IN,RPCL_OUT,RPWORKHOUR,RPSTATUS;
+    String RPTANGGAL,RPCL_IN,RPCL_OUT,RPWORKHOUR,RPSTATUS,RPNAMA;
 
     int EMPLOYEE_ID, PROJECT_ID, SUPERVISOR_ID = 0;
 
@@ -74,6 +74,7 @@ public class OcReport extends AppCompatActivity implements DatePickerDialog.OnDa
         RPCL_OUT = intent.getStringExtra("RPCL_OUT");
         RPWORKHOUR = intent.getStringExtra("RPWORKHOUR");
         RPSTATUS = intent.getStringExtra("RPSTATUS");
+        RPNAMA = intent.getStringExtra("RPNAMA");
         Log.e("Data",RPTANGGAL+","+RPCL_IN+","+RPCL_OUT+","+RPWORKHOUR+","+RPSTATUS);
         setContentView(R.layout.activity_detail_report);
 
@@ -219,6 +220,13 @@ public class OcReport extends AppCompatActivity implements DatePickerDialog.OnDa
 
     public void generateData(){
         inputForms = new ArrayList<InputForm>();
+        inputForm = new InputForm();
+        inputForm.setICON(getResources().getDrawable(R.drawable.ic_person));
+        inputForm.setTYPE("VIEWTEXT");
+        inputForm.setLABEL("Tanggal");
+        inputForm.setVALUE(RPNAMA);
+        inputForms.add(inputForm);
+
         inputForm = new InputForm();
         inputForm.setICON(getResources().getDrawable(R.drawable.ic_date_range));
         inputForm.setTYPE("VIEWTEXT");

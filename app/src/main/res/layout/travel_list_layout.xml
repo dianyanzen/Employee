@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    card_view:cardUseCompatPadding="true"
     android:padding="10dp"
     android:clickable="true"
     android:focusable="true"
     android:background="?android:attr/selectableItemBackground">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
 
     <ImageView
         android:layout_width="36dp"
@@ -32,9 +38,8 @@
         android:gravity="left"
         android:text="TextView"
         android:textStyle="bold" />
-
     <TextView
-        android:id="@+id/traveltv_lokasi"
+        android:id="@+id/traveltv_longtravel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/traveltv_tanggal"
@@ -43,7 +48,8 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="left"
-        android:text="TextView" />
+        android:text="TextView"/>
+
 
     <TextView
         android:id="@+id/traveltv_project"
@@ -58,7 +64,41 @@
         android:layout_toEndOf="@+id/traveltitik"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp" />
-
+    <TextView
+        android:id="@+id/traveltv_aproval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/traveltv_longtravel"
+        android:layout_alignStart="@+id/traveltv_longtravel"
+        android:layout_below="@+id/traveltv_longtravel"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"/>
+    <TextView
+        android:id="@+id/traveltv_participant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/traveltv_longtravel"
+        android:layout_toRightOf="@+id/traveltitik2"
+        android:layout_toEndOf="@+id/traveltitik2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+    <TextView
+        android:id="@+id/traveltv_lokasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/traveltv_aproval"
+        android:layout_alignStart="@+id/traveltv_aproval"
+        android:layout_below="@+id/traveltv_aproval"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView" />
     <ImageView
         android:id="@+id/traveliv_status"
         android:layout_width="36dp"
@@ -76,7 +116,18 @@
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:layout_below="@+id/traveltv_tanggal"
-        android:layout_toRightOf="@+id/traveltv_lokasi"
-        android:layout_toEndOf="@+id/traveltv_lokasi" />
+        android:layout_toRightOf="@+id/traveltv_longtravel"
+        android:layout_toEndOf="@+id/traveltv_longtravel" />
+    <TextView
+        android:id="@+id/traveltitik2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="·"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/traveltv_longtravel"
+        android:layout_toRightOf="@+id/traveltv_aproval"
+        android:layout_toEndOf="@+id/traveltv_aproval" />
 
 </RelativeLayout>
+</android.support.v7.widget.CardView>

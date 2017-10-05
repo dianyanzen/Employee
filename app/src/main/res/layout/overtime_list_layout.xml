@@ -96,6 +96,18 @@
         android:layout_toEndOf="@+id/ottitik3"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp" />
+    <TextView
+        android:id="@+id/ottv_uang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TextView"
+        android:layout_below="@+id/ottv_jamlembur"
+        android:layout_alignLeft="@+id/ottv_jamlembur"
+        android:layout_alignStart="@+id/ottv_jamlembur"
+        />
 
     <ImageView
         android:id="@+id/ottiv_status"

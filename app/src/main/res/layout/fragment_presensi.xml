@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="2.5dp"
+    android:paddingRight="2.5dp"
+    tools:context="id.personalia.employe.Fragment.PresensiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/clock_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="in"
+                    android:textStyle="bold"
+                    android:theme="@style/ArkaButtonBlue" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/clock_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="Out"
+                    android:textStyle="bold"
+                    android:theme="@style/ArkaButtonBlue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ListView
+                    android:id="@+id/lstbutton"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/swipeRefresh">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
