@@ -19,6 +19,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -128,6 +129,7 @@ public class PresensiFragment extends Fragment implements DatePickerDialog.OnDat
     SearchView sv;
     String param1,param2,val1,val2;
     String TodayVal;
+    AppCompatButton clockin, clockout;
     int EMPLOYEE_ID, PROJECT_ID, SUPERVISOR_ID = 0;
 
     private static int EMPLOYEE_REQUEST = 1000;
@@ -211,7 +213,29 @@ public class PresensiFragment extends Fragment implements DatePickerDialog.OnDat
                 }
             }
         });
+        clockin = (AppCompatButton) rootView.findViewById(R.id.clock_in);
+        clockout = (AppCompatButton) rootView.findViewById(R.id.clock_out);
+        clockin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent mainIntent = new Intent(getActivity(), DetailReportActivity.class);
+                mainIntent.putExtra("FragmentNM", "ClockIn");
+                startActivity(mainIntent);
+                getActivity().finish();
+                Log.e("Goto", "ClockOut");
+            }
+        });
+        clockout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(getActivity(), DetailReportActivity.class);
+                mainIntent.putExtra("FragmentNM", "ClockOut");
+                startActivity(mainIntent);
+                getActivity().finish();
+                Log.e("Goto", "ClockOut");
+            }
+        });
         listReport = (RecyclerView) rootView.findViewById(R.id.list);
         listReport.setHasFixedSize(true);
 
