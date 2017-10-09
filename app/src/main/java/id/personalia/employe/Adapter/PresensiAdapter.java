@@ -35,7 +35,7 @@ public class PresensiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     public PresensiAdapter(Context current) {
         this.context = current;
-        Reports = new ArrayList<>();
+        Reports = new ArrayList<Report>();
     }
 
     private void add(Report item) {

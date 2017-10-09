@@ -392,7 +392,7 @@ public class TravelFragment extends Fragment {
                     Log.e("Log",jsonObj.toString());
                     Log.e("data", "ada datanya");
                     JSONArray NotivJson = jsonObj.getJSONArray("data");
-                    List<Travel> Travels = new ArrayList<>();
+                    List<Travel> Travels = new ArrayList<Travel>();
                     Travel travel;
                     isLoading = false;
                     if (numData == 0) {

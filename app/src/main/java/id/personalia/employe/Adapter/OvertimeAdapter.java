@@ -35,7 +35,7 @@ public class OvertimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     public OvertimeAdapter(Context current) {
         this.context = current;
-        Overtimes = new ArrayList<>();
+        Overtimes = new ArrayList<Overtime>();
     }
 
     private void add(Overtime item) {

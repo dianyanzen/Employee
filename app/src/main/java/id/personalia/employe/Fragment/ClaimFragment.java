@@ -382,7 +382,7 @@ public class ClaimFragment extends Fragment {
                     Log.e("Log",jsonObj.toString());
                     Log.e("data", "ada datanya");
                     JSONArray MainJson = jsonObj.getJSONArray("data");
-                    List<Claim> Claims = new ArrayList<>();
+                    List<Claim> Claims = new ArrayList<Claim>();
                     Claim claim;
                     isLoading = false;
                     if (numData == 0) {

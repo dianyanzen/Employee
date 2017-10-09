@@ -41,7 +41,7 @@ public class TravelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     public TravelAdapter(Context current) {
         this.context = current;
-        Travels = new ArrayList<>();
+        Travels = new ArrayList<Travel>();
     }
 
     private void add(Travel item) {

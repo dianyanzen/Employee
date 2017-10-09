@@ -384,7 +384,7 @@ public class OvertimeFragment extends Fragment {
                     Log.e("Log",jsonObj.toString());
                     Log.e("data", "ada datanya");
                     JSONArray NotivJson = jsonObj.getJSONArray("data");
-                    List<Overtime> Overtimes = new ArrayList<>();
+                    List<Overtime> Overtimes = new ArrayList<Overtime>();
                     Overtime overtime;
                     isLoading = false;
                     if (numData == 0) {

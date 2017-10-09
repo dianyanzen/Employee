@@ -384,7 +384,7 @@ public class AttendanceFragment extends Fragment {
                     Log.e("Log",jsonObj.toString());
                     Log.e("data", "ada datanya");
                     JSONArray MainJson = jsonObj.getJSONArray("data");
-                    List<Attendance> Attendances = new ArrayList<>();
+                    List<Attendance> Attendances = new ArrayList<Attendance>();
                     Attendance attendance;
                     isLoading = false;
                     if (numData == 0) {

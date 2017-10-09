@@ -35,7 +35,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context context;
     public AttendanceAdapter(Context current) {
         this.context = current;
-        Attendances = new ArrayList<>();
+        Attendances = new ArrayList<Attendance>();
     }
 
     private void add(Attendance item) {

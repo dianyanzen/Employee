@@ -385,7 +385,7 @@ public class ReportFragment extends Fragment {
                     Log.e("Log",jsonObj.toString());
                     Log.e("data", "ada datanya");
                     JSONArray NotivJson = jsonObj.getJSONArray("data");
-                    List<Report> Reports = new ArrayList<>();
+                    List<Report> Reports = new ArrayList<Report>();
                     Report report;
                     isLoading = false;
                     if (numData == 0) {

@@ -35,7 +35,7 @@ public class ReportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     public ReportAdapter(Context current) {
         this.context = current;
-        Reports = new ArrayList<>();
+        Reports = new ArrayList<Report>();
     }
 
     private void add(Report item) {

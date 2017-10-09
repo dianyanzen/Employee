@@ -36,7 +36,7 @@ public class ClaimAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private Context context;
     public ClaimAdapter(Context current) {
         this.context = current;
-        Claims = new ArrayList<>();
+        Claims = new ArrayList<Claim>();
     }
 
     private void add(Claim item) {

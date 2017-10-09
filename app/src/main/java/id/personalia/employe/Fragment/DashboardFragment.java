@@ -175,7 +175,7 @@ public class DashboardFragment extends Fragment {
     public void dummyData() {
 
 
-        Dashboards = new ArrayList<>();
+        Dashboards = new ArrayList<Dashboard>();
 
         Dashboard = new Dashboard();
         Dashboard.setMAIN("Clock In");
