@@ -71,8 +71,9 @@ public class Activity_Login  extends AppCompatActivity {
         regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://personalia.id/register"));
-                startActivity(browserIntent);
+                Intent mainIntent = new Intent(Activity_Login.this, Activity_Register.class);
+                startActivity(mainIntent);
+
             }
         });
         login.setOnClickListener(new View.OnClickListener() {

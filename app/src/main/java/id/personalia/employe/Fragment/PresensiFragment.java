@@ -222,7 +222,6 @@ public class PresensiFragment extends Fragment implements DatePickerDialog.OnDat
                 Intent mainIntent = new Intent(getActivity(), DetailReportActivity.class);
                 mainIntent.putExtra("FragmentNM", "ClockIn");
                 startActivity(mainIntent);
-                getActivity().finish();
                 Log.e("Goto", "ClockOut");
             }
         });
@@ -232,7 +231,6 @@ public class PresensiFragment extends Fragment implements DatePickerDialog.OnDat
                 Intent mainIntent = new Intent(getActivity(), DetailReportActivity.class);
                 mainIntent.putExtra("FragmentNM", "ClockOut");
                 startActivity(mainIntent);
-                getActivity().finish();
                 Log.e("Goto", "ClockOut");
             }
         });

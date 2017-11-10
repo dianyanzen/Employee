@@ -173,15 +173,8 @@ public class DashboardFragment extends Fragment {
 
 
     public void dummyData() {
-
-
         Dashboards = new ArrayList<Dashboard>();
-
         Dashboard = new Dashboard();
-        Dashboard.setMAIN("Clock In");
-        Dashboard.setINFO("--:--:--");
-        Dashboard.setSTATUS("Anda Belum Clock In");
-        Dashboards.add(Dashboard);
 
     }
 

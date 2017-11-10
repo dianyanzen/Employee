@@ -48,13 +48,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import id.personalia.employe.Adapter.InputFormAdapter;
 import id.personalia.employe.Helper.ArkaHelper;
+import id.personalia.employe.Helper.DbUserData;
 import id.personalia.employe.Helper.GPSTracker;
 import id.personalia.employe.Helper.PermissionUtils;
 import id.personalia.employe.Model.InputForm;
+import id.personalia.employe.Model.UserData;
 import id.personalia.employe.R;
 
 import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_HYBRID;
@@ -87,7 +90,7 @@ public class DetailReportActivity extends AppCompatActivity
          * {@link #onRequestPermissionsResult(int, String[], int[])}.
          */
         private boolean mPermissionDenied = false;
-
+        private static String is_admin,employee_id,employee_name,company_id,atasan_name,atasan_id;
         private GoogleMap mMap;
         private Spinner mSpinner;
         private LocationManager locationManager;
@@ -301,6 +304,20 @@ public class DetailReportActivity extends AppCompatActivity
         }
 
         public void generateData(){
+                DbUserData db = new DbUserData(DetailReportActivity.this);
+                List<UserData> UserDataList = db.getAllUserDataList();
+                for (UserData userData : UserDataList) {
+                        if (!userData.getEMPLOYEE_ID().isEmpty()) {
+                                is_admin = userData.getIS_ADMIN();
+                                employee_id = userData.getEMPLOYEE_ID();
+                                employee_name = userData.getEMPLOYEE_NAME();
+                                atasan_name = userData.getATASAN_NAME();
+                                atasan_id = userData.getATASAN_ID();
+                                //Toast.makeText(this, atasan_name, Toast.LENGTH_LONG).show();
+
+
+                        }
+                }
                 inputForms = new ArrayList<InputForm>();
 
                 inputForm = new InputForm();
@@ -322,7 +339,7 @@ public class DetailReportActivity extends AppCompatActivity
                 inputForm.setICON(getResources().getDrawable(R.drawable.ic_person));
                 inputForm.setTYPE("EMPLOYEE");
                 inputForm.setLABEL("Diajukan Oleh");
-                inputForm.setVALUE("Cep Johnson");
+                inputForm.setVALUE(employee_name);
                 inputForms.add(inputForm);
 
         }
