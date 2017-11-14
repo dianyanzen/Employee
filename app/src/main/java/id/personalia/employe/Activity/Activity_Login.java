@@ -47,6 +47,8 @@ import id.personalia.employe.R;
 
 public class Activity_Login  extends AppCompatActivity {
     SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
     public static final String KEY_UserId_SP = "MyUserid";
     public static final String KEY_Sessid_SP = "MySessid";
     public static final String KEY_UserName_SP = "MyUsername";
@@ -57,6 +59,7 @@ public class Activity_Login  extends AppCompatActivity {
     private EditText etloginPassword;
     AppCompatButton login;
     private int pressbuttonback = 0;
+    private Button btnSetting;
     DbUserData db = new DbUserData(this);
 
     @Override
@@ -76,6 +79,24 @@ public class Activity_Login  extends AppCompatActivity {
 
             }
         });
+        btnSetting=(Button)findViewById((R.id.urlSetting));
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                moveToSettingActivity();
+            }
+        });
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        if(sharedpreferences.contains("URLEndPoint")) {
+            ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
+        }else if(sharedpreferences.contains("URLPMSEndPoint")){
+            PMSENDPOINT = sharedpreferences.getString("URLPMSEndPoint", "");
+        }else{
+            Toast.makeText(getApplicationContext(), "Web Service URL Not Set..", Toast.LENGTH_SHORT).show();
+            moveToSettingActivity();
+        }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,19 +106,25 @@ public class Activity_Login  extends AppCompatActivity {
                 final String username = etloginUsername.getText().toString();
                 final String password = etloginPassword.getText().toString();
                 final String token = FirebaseInstanceId.getInstance().getToken();
-                final String UrlPort = "http://192.168.4.112/cpms/Androidlogin";
+                final String UrlPort = ENDPOINT+"Androidlogin";
                 // Initialize  AsyncLogin() class with email and password
                 new AsyncLogin().execute(username, password, token, UrlPort);
                 Log.e("Alur1", "Awal");
 
             }
         });
+
     }
     private void launchMenu(){
         Intent mainIntent = new Intent(Activity_Login.this, Activity_Main.class);
         mainIntent.putExtra("FragmentNM", "Dashboard");
         startActivity(mainIntent);
         finish();
+    }
+    public void moveToSettingActivity(){
+        Intent intent = new Intent(getApplicationContext(), Activity_Setting.class);
+        startActivity(intent);
+        //finish();
     }
     private class AsyncLogin extends AsyncTask<String, Void, String> {
         ProgressDialog pdLoading = new ProgressDialog(Activity_Login.this);

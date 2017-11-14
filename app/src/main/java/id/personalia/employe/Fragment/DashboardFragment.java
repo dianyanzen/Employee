@@ -1,8 +1,10 @@
 package id.personalia.employe.Fragment;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -50,7 +52,9 @@ import static java.lang.Integer.parseInt;
  */
 
 public class DashboardFragment extends Fragment {
-
+    SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
     ArrayList<Dashboard> Dashboards;
     id.personalia.employe.Model.Dashboard Dashboard;
     private RecyclerView recyclerView;
@@ -63,7 +67,7 @@ public class DashboardFragment extends Fragment {
     AppBarLayout appBarLayout;
     ImageView imageView;
     RecyclerView.LayoutManager mLayoutManager;
-    final String UrlPort = "http://192.168.4.112/cpms/Androiddashboard";
+    String UrlPort;
     String is_admin;
     String employee_id;
     String company_id;
@@ -88,7 +92,9 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appBarLayout);
         appBarLayout.setExpanded(true);
-
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
+        String UrlPort = ENDPOINT+"Androiddashboard";
         imageView = (ImageView) getActivity().findViewById(R.id.image);
         imageView.setImageResource(R.drawable.bgdashboard);
 

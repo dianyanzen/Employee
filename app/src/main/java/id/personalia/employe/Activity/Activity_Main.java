@@ -4,10 +4,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
@@ -61,6 +63,9 @@ public class Activity_Main  extends AppCompatActivity
     Project Project;
     String FragmentNM;
     DbUserData db = new DbUserData(this);
+    SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,8 @@ public class Activity_Main  extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
         projectData();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -189,7 +196,7 @@ public class Activity_Main  extends AppCompatActivity
                     Log.e("imageurl",imageurl);
                     Log.e("companyid",companyid);
                         Glide.with(Activity_Main.this)
-                        .load("https://personalia.id/assets/cid"+companyid+"/profile/thumbs/"+imageurl)
+                        .load(ENDPOINT+"assets/cid"+companyid+"/profile/thumbs/"+imageurl)
                         .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_photo))
                         //.thumbnail(0.5f)
 
@@ -197,7 +204,7 @@ public class Activity_Main  extends AppCompatActivity
                         .into(UserImage);
                 }else{
                     Glide.with(Activity_Main.this)
-                        .load("https://personalia.id/zrcs/default/assets/images/users/thumbs/user_photo.png")
+                        .load(ENDPOINT+"zrcs/default/assets/images/users/thumbs/user_photo.png")
                         .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user_photo))
                             //.thumbnail(0.5f)
                             //.placeholder(R.drawable.user)

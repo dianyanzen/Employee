@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">personalia.id</string>
+    <string name="url">Pengaturan</string>
+    <string name="url_reg">Daftar Sekarang</string>
+    <string name="url_desc">Belum Memiliki Akun?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,6 +10,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Log in</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_setting">Pengaturan</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -54,6 +58,12 @@
     <string name="detail_attendance">Rincian Izin</string>
     <string name="detail_overtime">Rincian Lembur</string>
     <string name="detail_report">Rincian Kehadiran</string>
+
+    <!-- Setting -->
+    <string name="setting_text1">Url Portal</string>
+    <string name="setting_text2">Url Pms</string>
+    <string name="setting_hinttext">https://personalia.id/</string>
+    <string name="save">Simpan</string>
 
     <!--    Permissions    -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
