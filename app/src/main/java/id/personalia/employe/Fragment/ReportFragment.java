@@ -2,12 +2,14 @@ package id.personalia.employe.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -84,7 +86,10 @@ public class ReportFragment extends Fragment {
     private Animation fab_open,fab_close,fab_close_fast,rotate_forward,rotate_backward;
     AppBarLayout appBarLayout;
     ImageView imageView;
-    final String UrlPort = "http://192.168.4.112/cpms/Androidattendance";
+    SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
+    String UrlPort;
     String is_admin;
     String employee_id;
     String company_id;
@@ -115,7 +120,9 @@ public class ReportFragment extends Fragment {
         }
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appBarLayout);
         appBarLayout.setExpanded(true);
-
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
+        UrlPort = ENDPOINT+"Androidattendance";
         imageView = (ImageView) getActivity().findViewById(R.id.image);
         imageView.setImageResource(R.drawable.bgattend);
 

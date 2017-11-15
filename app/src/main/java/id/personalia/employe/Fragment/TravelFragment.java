@@ -90,7 +90,10 @@ public class TravelFragment extends Fragment {
     private Animation fab_open,fab_close,fab_close_fast,rotate_forward,rotate_backward;
     AppBarLayout appBarLayout;
     ImageView imageView;
-    final String UrlPort = "http://192.168.4.112/cpms/Androidofficial_travel";
+    SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
+    String UrlPort;
     String is_admin;
     String employee_id;
     String company_id;
@@ -121,7 +124,9 @@ public class TravelFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appBarLayout);
         appBarLayout.setExpanded(true);
-
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
+        UrlPort = ENDPOINT+"Androidofficial_travel";
         imageView = (ImageView) getActivity().findViewById(R.id.image);
         imageView.setImageResource(R.drawable.bgtravel);
 

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -110,7 +112,10 @@ public class PresensiFragment extends Fragment implements DatePickerDialog.OnDat
     private Animation fab_open,fab_close,fab_close_fast,rotate_forward,rotate_backward;
     AppBarLayout appBarLayout;
     ImageView imageView;
-    final String UrlPort = "http://192.168.4.112/cpms/Androidattendance";
+    SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
+    String UrlPort;
     String is_admin;
     String employee_id;
     String company_id;
@@ -155,7 +160,9 @@ public class PresensiFragment extends Fragment implements DatePickerDialog.OnDat
         View rootView = inflater.inflate(R.layout.fragment_presensi, container, false);
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appBarLayout);
         appBarLayout.setExpanded(false);
-
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
+        UrlPort = ENDPOINT+"Androidattendance";
         helper = new ArkaHelper(getActivity());
         currentTime();
         currentDate();

@@ -2,12 +2,14 @@ package id.personalia.employe.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -69,7 +71,9 @@ import static java.lang.Integer.parseInt;
  */
 
 public class OvertimeFragment extends Fragment {
-
+    SharedPreferences sharedpreferences;
+    public String ENDPOINT="https://personalia.id/";
+    public String PMSENDPOINT="https://personalia.id/";
     private int PAGE_SIZE = 1;
 
     private boolean isLastPage = false;
@@ -86,7 +90,7 @@ public class OvertimeFragment extends Fragment {
     private Animation fab_open,fab_close,fab_close_fast,rotate_forward,rotate_backward;
     AppBarLayout appBarLayout;
     ImageView imageView;
-    final String UrlPort = "http://192.168.4.112/cpms/Androidovertime";
+    String UrlPort;
     String is_admin;
     String employee_id;
     String company_id;
@@ -115,6 +119,9 @@ public class OvertimeFragment extends Fragment {
             val2 = bundle.getString("val2");
 
         }
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
+        UrlPort = ENDPOINT+"Androidovertime";
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appBarLayout);
         appBarLayout.setExpanded(true);
 

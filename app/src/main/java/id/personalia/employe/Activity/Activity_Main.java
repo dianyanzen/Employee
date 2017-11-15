@@ -340,6 +340,12 @@ public class Activity_Main  extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, fragment, "REPORT");
             fragmentTransaction.addToBackStack("REPORT");
             fragmentTransaction.commit();
+        } else if (id == R.id.nav_help) {
+            Intent mainIntent = new Intent(Activity_Main.this, Activity_Help.class);
+            startActivity(mainIntent);
+        } else if (id == R.id.nav_settings) {
+            Intent mainIntent = new Intent(Activity_Main.this, Activity_Setting.class);
+            startActivity(mainIntent);
         } else if (id == R.id.nav_logout) {
             db.deleteAllUserData();
             Intent mainIntent = new Intent(Activity_Main.this, Activity_Login.class);

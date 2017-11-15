@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout2">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <TableLayout
+    android:layout_below="@+id/appBarLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:background="@drawable/round_shape"
+    android:collapseColumns="*"
+    android:padding="20dp"
+
+    android:stretchColumns="*">
+        <TableRow
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            >
+            <TextView
+                android:layout_span="4"
+                android:layout_height="30dp"
+                />
+    </TableRow>
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+
+        >
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/logo_app_personalia2"
+                android:layout_span="4"
+                />
+    </TableRow>
+
+
+    <TableRow>
+        <TextView
+            android:text="Email:"
+            android:textColor="@color/blueDark"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:text="support@personalia.id"
+            android:layout_marginTop="10dp"
+
+            android:textSize="16dp"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="Call:"
+            android:textColor="@color/blueDark"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:text="(+62) 817-2311-185"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"
+            />
+    </TableRow>
+</TableLayout>
+</RelativeLayout>

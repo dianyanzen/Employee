@@ -8,6 +8,7 @@
     <color name="arkaEditTextNormal">#555555</color>
     <color name="arkaEditTextHighlight">#555555</color>
     <color name="arkaEditTextActivated">#555555</color>
+    <color name="arkaDarkBacground">#36404e</color>
 
     <color name="arkaTextLight">#dadada</color>
     <color name="arkaTextDark">#555555</color>
@@ -26,5 +27,6 @@
 
     <color name="green">#8FCC85</color>
     <color name="blue">#ff33b5e5</color>
+    <color name="blueDark">#7fc1fc</color>
     <color name="white">#ffffff</color>
 </resources>

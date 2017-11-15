@@ -2,9 +2,13 @@ package id.personalia.employe.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,11 +25,29 @@ public class Activity_Setting extends AppCompatActivity {
     EditText txtURLEndPoint;
     EditText txtURLPMSEndPoint;
     Button btnSaveURLEndPoint;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        Drawable navIcon = getResources().getDrawable(R.drawable.ic_chevron_left);
+        navIcon.mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+
+        toolbar.setNavigationIcon(navIcon);
+
+        setSupportActionBar(toolbar);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        setTitle(getResources().getString(R.string.settings));
         txtURLEndPoint= (EditText)findViewById(R.id.txtURLEndPoint);
         txtURLPMSEndPoint= (EditText)findViewById(R.id.txtURLPMSEndPoint);
         btnSaveURLEndPoint=(Button)findViewById(R.id.btnSaveURLEndPoint);

@@ -55,6 +55,7 @@ public class DashboardFragment extends Fragment {
     SharedPreferences sharedpreferences;
     public String ENDPOINT="https://personalia.id/";
     public String PMSENDPOINT="https://personalia.id/";
+    String UrlPort;
     ArrayList<Dashboard> Dashboards;
     id.personalia.employe.Model.Dashboard Dashboard;
     private RecyclerView recyclerView;
@@ -67,7 +68,7 @@ public class DashboardFragment extends Fragment {
     AppBarLayout appBarLayout;
     ImageView imageView;
     RecyclerView.LayoutManager mLayoutManager;
-    String UrlPort;
+
     String is_admin;
     String employee_id;
     String company_id;
@@ -94,7 +95,7 @@ public class DashboardFragment extends Fragment {
         appBarLayout.setExpanded(true);
         sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         ENDPOINT = sharedpreferences.getString("URLEndPoint", "");
-        String UrlPort = ENDPOINT+"Androiddashboard";
+        UrlPort = ENDPOINT+"Androiddashboard";
         imageView = (ImageView) getActivity().findViewById(R.id.image);
         imageView.setImageResource(R.drawable.bgdashboard);
 
